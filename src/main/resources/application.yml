@@ -1,7 +1,7 @@
 server:
   tomcat:
     uri-encoding: UTF-8
-  port : 7878
+  port : 8883
   servlet:
       context-path: /ripple
 spring:
@@ -83,7 +83,7 @@ eureka:
     registry-fetch-interval-seconds: 5
     registerwitheureka: true
     serviceUrl :
-      defaultZone: http://localhost:1111/eureka/
+      defaultZone: http://localhost:8881/eureka/
   instance:
     instance-id: ${spring.cloud.client.ipAddress}:${server.port}
     #Eureka客户端向服务端发送心跳的时间间隔，单位为秒（客户端告诉服务端自己会按照该规则），默认30
