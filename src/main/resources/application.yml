@@ -15,9 +15,9 @@ spring:
 
 #单体注掉
 #spring-cloud
-#  cloud:
-#      client:
-#         ipAddress: localhost
+  cloud:
+      client:
+         ipAddress: localhost
   http:
     encoding:
       charset: UTF-8
@@ -77,16 +77,21 @@ spring:
 
 #单体注掉
 #spring-cloud
-#eureka:
-#  instance:
-#   preferIpAddress: true
-#    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
-#    leaseRenewalIntervalInSeconds: 5
-#    leaseExpirationDurationInSeconds: 6
-#  client:
-#    registerwitheureka: true
-#    serviceUrl :
-#      defaultZone: http://localhost:1111/eureka/
+eureka:
+  client:
+    #eureka client刷新本地缓存时间，默认30
+    registry-fetch-interval-seconds: 5
+    registerwitheureka: true
+    serviceUrl :
+      defaultZone: http://localhost:1111/eureka/
+  instance:
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    #Eureka客户端向服务端发送心跳的时间间隔，单位为秒（客户端告诉服务端自己会按照该规则），默认30
+    lease-expiration-duration-in-seconds: 5
+    #Eureka服务端在收到最后一次心跳之后等待的时间上限，单位为秒，超过则剔除（客户端告诉服务端按照此规则等待自己），默认90
+    lease-renewal-interval-in-seconds: 7
+    appname: ${spring.application.name}
+    prefer-ip-address: true
 
 #mybatis.typeAliasesPackage=top.coderakak.entity
 #mybatis.mapperLocations=classpath\:mapper/*.xml
