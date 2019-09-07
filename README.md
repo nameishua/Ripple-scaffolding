@@ -25,5 +25,5 @@
             @Synchronized该注解自动添加到同步机制,有趣的是,生成的代码并不是直接锁方法,而是锁代码块， 作用范围是方法上;
         E:Spring Boot Banner;
         F:SpringCloud;
-        G:kafka
+        G:Kafka
 ![image](https://raw.githubusercontent.com/nameishua/Zuul-gateway/master/src/main/resources/static/46c48e0b28ce0a91c821cd22ab94748.png)
