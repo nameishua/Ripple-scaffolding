@@ -121,6 +121,11 @@
             <artifactId>httpmime</artifactId>
             <version>4.5.3</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+            <version>2.2.7.RELEASE</version>
+        </dependency>
         <!--单体注掉-->
         <!--spring-cloud-->
         <dependency>
