@@ -21,7 +21,7 @@
         @AllArgsConstructor：注解在类上；为类提供一个全参的构造方法
         @NonNull该注解快速判断是否为空,如果为空,则抛出java.lang.NullPointerException
         @Synchronized该注解自动添加到同步机制,有趣的是,生成的代码并不是直接锁方法,而是锁代码块， 作用范围是方法上;
-        D:common crud
+        D:Common crud
         E:Mybatis Plus
         F:SpringCloud
         G:shiro
