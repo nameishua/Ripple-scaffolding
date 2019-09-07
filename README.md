@@ -5,10 +5,6 @@
 
 个人学习
 
-----------------------------------------------------
-
-
-
         1.2.1:
         
         A:Basecrud;
@@ -26,4 +22,6 @@
         E:Spring Boot Banner;
         F:SpringCloud;
         G:Kafka
+        H:定时任务@Scheduled    
+[关于Cron表达式](http://coderak.top/#/view/33)
 ![image](https://raw.githubusercontent.com/nameishua/Zuul-gateway/master/src/main/resources/static/46c48e0b28ce0a91c821cd22ab94748.png)
