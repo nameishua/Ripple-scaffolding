@@ -10,6 +10,7 @@ import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.SuccessCallback;
 import top.coderak.core.utils.MD5Utils;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -56,7 +57,7 @@ public class KafkaSender {
 
         map.put("Topic", "aktest");
 
-        map.put("Data", "测试数据：" + MD5Utils.string2MD5(new Random().toString()));
+        map.put("Data", "测试数据：" + MD5Utils.string2MD5(new Random().toString()) + new Date());
 
         sendChannel("aktest", map.toString());
     }
