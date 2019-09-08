@@ -121,6 +121,7 @@ mybatis-plus:
   
 # 打印sql
 logging:
+  config: classpath:log/log4j2.xml
   level:
      top.coderak.mapper : debug
      top.coderak.core.base.mapper : debug

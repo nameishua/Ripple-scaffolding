@@ -1,6 +1,7 @@
 
 package top.coderak.core.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.*;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -31,587 +32,482 @@ import java.util.Map;
 
 
 /**
- *HttpClient工具类
+ * HttpClient工具类
  */
-public class HttpUtil
-{
-	/**
-	 * 发送get请求
-	 * @param url 请求
-	 * @return 返回结果
-	 */
-	public static String doGet(String url) throws Exception
-	{
+@Slf4j
+public class HttpUtil {
+    /**
+     * 发送get请求
+     *
+     * @param url 请求
+     * @return 返回结果
+     */
+    public static String doGet(String url) throws Exception {
 
-		try
-		{
-			// 创建HttpUtil.java对象
-			HttpClient client = new DefaultHttpClient();
-			
-			// 组织get请求
-			HttpGet requset = new HttpGet(url);
-			
-			// 执行请求
-			HttpResponse response = client.execute(requset);
+        try {
+            // 创建HttpUtil.java对象
+            HttpClient client = new DefaultHttpClient();
 
-			// 请求发送成功，并得到响应 
-			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)
-			{
-				// 读取服务器返回数据 
-				String strResult = EntityUtils.toString(response.getEntity());
+            // 组织get请求
+            HttpGet requset = new HttpGet(url);
 
-				// 返回结果
-				return strResult;
-			}
-			else 
-			{
-				// 抛出道common层异常
-				throw new Exception("ERROR-REQUEST");
-			}
-		}
-		catch (IOException e)
-		{
+            // 执行请求
+            HttpResponse response = client.execute(requset);
 
-			// 抛出道common层异常
-			throw new Exception("ERROR-IO");
-		}
-	}
+            // 请求发送成功，并得到响应
+            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                // 读取服务器返回数据
+                String strResult = EntityUtils.toString(response.getEntity());
 
-	/**
-	 * post请求(用于key-value格式的参数)
-	 * @param url
-	 * @param params
-	 * @return
-	 */
-	public static String doPost(String url, Map params)
-	{
+                // 返回结果
+                return strResult;
+            } else {
+                // 抛出道common层异常
+                throw new Exception("ERROR-REQUEST");
+            }
+        } catch (IOException e) {
 
-		BufferedReader in = null;
+            // 抛出道common层异常
+            throw new Exception("ERROR-IO");
+        }
+    }
 
-		try
-		{
+    /**
+     * post请求(用于key-value格式的参数)
+     *
+     * @param url
+     * @param params
+     * @return
+     */
+    public static String doPost(String url, Map params) {
 
-			// 定义HttpClient
-			HttpClient client = new DefaultHttpClient();
+        BufferedReader in = null;
 
-			// 实例化HTTP方法
-			HttpPost request = new HttpPost();
+        try {
 
-			request.setURI(new URI(url));
+            // 定义HttpClient
+            HttpClient client = new DefaultHttpClient();
 
-			// 设置参数
-			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+            // 实例化HTTP方法
+            HttpPost request = new HttpPost();
 
-			for (Iterator iter = params.keySet().iterator(); iter.hasNext();)
-			{
+            request.setURI(new URI(url));
 
-				String name = (String) iter.next();
+            // 设置参数
+            List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 
-				String value = String.valueOf(params.get(name));
+            for (Iterator iter = params.keySet().iterator(); iter.hasNext(); ) {
 
-				nvps.add(new BasicNameValuePair(name, value));
+                String name = (String) iter.next();
 
-			}
+                String value = String.valueOf(params.get(name));
 
-			request.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+                nvps.add(new BasicNameValuePair(name, value));
 
-			HttpResponse response = client.execute(request);
+            }
 
-			int code = response.getStatusLine().getStatusCode();
+            request.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
 
-			if (code == 200)
-			{
-				// 请求成功
-				in = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"));
+            HttpResponse response = client.execute(request);
 
-				StringBuffer sb = new StringBuffer("");
+            int code = response.getStatusLine().getStatusCode();
 
-				String line = "";
+            if (code == 200) {
+                // 请求成功
+                in = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"));
 
-				String NL = System.getProperty("line.separator");
+                StringBuffer sb = new StringBuffer("");
 
-				while ((line = in.readLine()) != null)
-				{
-					sb.append(line + NL);
-				}
+                String line = "";
 
-				in.close();
+                String NL = System.getProperty("line.separator");
 
-				return sb.toString();
-			}
-			else
-			{ //
-				System.out.println("状态码：" + code);
-				return null;
-			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
+                while ((line = in.readLine()) != null) {
+                    sb.append(line + NL);
+                }
 
-			return null;
-		}
-	}
+                in.close();
 
-	/**
-	 * post请求（用于请求json格式的参数）
-	 * @param url
-	 * @param params
-	 * @return
-	 */
-	public static String doPost(String url, String params) throws Exception
-	{
+                return sb.toString();
+            } else { //
+                System.out.println("状态码：" + code);
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
 
-		CloseableHttpClient httpclient = HttpClients.createDefault();
-		
-		// 创建httpPost
-		HttpPost httpPost = new HttpPost(url);
-		
-		httpPost.setHeader("Accept", "application/json");
-		
-		httpPost.setHeader("Content-Type", "application/json");
-		
-		String charSet = "UTF-8";
-		
-		StringEntity entity = new StringEntity(params, charSet);
-		
-		httpPost.setEntity(entity);
-		
-		CloseableHttpResponse response = null;
+            return null;
+        }
+    }
 
-		try
-		{
+    /**
+     * post请求（用于请求json格式的参数）
+     *
+     * @param url
+     * @param params
+     * @return
+     */
+    public static String doPost(String url, String params) throws Exception {
 
-			response = httpclient.execute(httpPost);
-			
-			StatusLine status = response.getStatusLine();
-			
-			int state = status.getStatusCode();
-			
-			if (state == HttpStatus.SC_OK)
-			{
-				HttpEntity responseEntity = response.getEntity();
-				
-				String jsonString = EntityUtils.toString(responseEntity);
-				
-				return jsonString;
-			}
-		}
-		finally
-		{
-			
-			if (response != null)
-			{
-				try
-				{
-					
-					response.close();
-				}
-				catch (IOException e)
-				{
-					
-//					LogHelper.getInstance().log(LogConstants.LOG_LEVEL_ERROR, e.getMessage(), e);
-				}
-			}
-			try
-			{
-				
-				httpclient.close();
-			}
-			catch (IOException e)
-			{
-				
-//				LogHelper.getInstance().log(LogConstants.LOG_LEVEL_ERROR, e.getMessage(), e);
-			}
-		}
-		return null;
-	}
+        CloseableHttpClient httpclient = HttpClients.createDefault();
 
-	/**
-	 * post请求（用于请求json格式的参数）
-	 * @param url
-	 * @param params
-	 * @param token
-	 * @return
-	 */
-	public static String doPost(String url, String params, String tokenKey,String token) throws Exception
-	{
+        // 创建httpPost
+        HttpPost httpPost = new HttpPost(url);
 
-		CloseableHttpClient httpclient = HttpClients.createDefault();
-		HttpPost httpPost = new HttpPost(url);// 创建httpPost
-		httpPost.setHeader("Accept", "application/json");
-		httpPost.setHeader("Content-Type", "application/json");
-		httpPost.setHeader(tokenKey, token);
-		String charSet = "UTF-8";
-		StringEntity entity = new StringEntity(params, charSet);
-		httpPost.setEntity(entity);
-		CloseableHttpResponse response = null;
+        httpPost.setHeader("Accept", "application/json");
 
-		try
-		{
+        httpPost.setHeader("Content-Type", "application/json");
 
-			response = httpclient.execute(httpPost);
-			StatusLine status = response.getStatusLine();
-			int state = status.getStatusCode();
-			if (state == HttpStatus.SC_OK)
-			{
-				HttpEntity responseEntity = response.getEntity();
-				String jsonString = EntityUtils.toString(responseEntity);
-				return jsonString;
-			}
-		}
-		finally
-		{
-			if (response != null)
-			{
-				try
-				{
-					response.close();
-				}
-				catch (IOException e)
-				{
-//					LogHelper.getInstance().log(LogConstants.LOG_LEVEL_ERROR, e.getMessage(), e);
-				}
-			}
-			try
-			{
-				httpclient.close();
-			}
-			catch (IOException e)
-			{
-//				LogHelper.getInstance().log(LogConstants.LOG_LEVEL_ERROR, e.getMessage(), e);
-			}
-		}
-		return null;
-	}
+        String charSet = "UTF-8";
 
-	/**
-	 * post请求（用于请求json格式的参数）
-	 * @param url
-	 * @param params
-	 * @param token
-	 * @return
-	 */
-	public static String doPost(String url, String params, String tokenKey,String token,String contentType) throws Exception
-	{
+        StringEntity entity = new StringEntity(params, charSet);
 
-		CloseableHttpClient httpclient = HttpClients.createDefault();
-		HttpPost httpPost = new HttpPost(url);// 创建httpPost
-		httpPost.setHeader("Accept", "application/json");
-		httpPost.setHeader("Content-Type", contentType);
-		httpPost.setHeader(tokenKey, token);
-		String charSet = "UTF-8";
-		StringEntity entity = new StringEntity(params, charSet);
-		httpPost.setEntity(entity);
-		CloseableHttpResponse response = null;
+        httpPost.setEntity(entity);
 
-		try
-		{
+        CloseableHttpResponse response = null;
 
-			response = httpclient.execute(httpPost);
-			StatusLine status = response.getStatusLine();
-			int state = status.getStatusCode();
-			if (state == HttpStatus.SC_OK)
-			{
-				HttpEntity responseEntity = response.getEntity();
-				String jsonString = EntityUtils.toString(responseEntity);
-				return jsonString;
-			}
-		}
-		finally
-		{
-			if (response != null)
-			{
-				try
-				{
-					response.close();
-				}
-				catch (IOException e)
-				{
-//					LogHelper.getInstance().log(LogConstants.LOG_LEVEL_ERROR, e.getMessage(), e);
-				}
-			}
-			try
-			{
-				httpclient.close();
-			}
-			catch (IOException e)
-			{
-//				LogHelper.getInstance().log(LogConstants.LOG_LEVEL_ERROR, e.getMessage(), e);
-			}
-		}
-		return null;
-	}
-	
-	/**
-	 * post请求（用于请求json格式的参数）
-	 * @param url
-	 * @param params
-	 * @param token
-	 * @return
-	 */
-	public static String doFormPost(String url, String params, String tokenKey,String token) throws Exception
-	{
+        try {
 
-		CloseableHttpClient httpclient = HttpClients.createDefault();
-		
-		// 创建httpPost
-		HttpPost httpPost = new HttpPost(url);
-		httpPost.setHeader("Accept", "application/x-www-form-urlencoded");
-		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
-		
-		httpPost.setHeader(tokenKey, token);
-		
-		String charSet = "UTF-8";
-		
-		StringEntity entity = new StringEntity(params, charSet);
-		
-		httpPost.setEntity(entity);
-		
-		CloseableHttpResponse response = null;
+            response = httpclient.execute(httpPost);
 
-		try
-		{
+            StatusLine status = response.getStatusLine();
 
-			response = httpclient.execute(httpPost);
-			
-			StatusLine status = response.getStatusLine();
-			
-			int state = status.getStatusCode();
-			
-			if (state == HttpStatus.SC_OK)
-			{
-				HttpEntity responseEntity = response.getEntity();
-				
-				String jsonString = EntityUtils.toString(responseEntity);
-				
-				return jsonString;
-			}
-		}
-		finally
-		{
-			if (response != null)
-			{
-				try
-				{
-					response.close();
-				}
-				catch (IOException e)
-				{
-//					LogHelper.getInstance().log(LogConstants.LOG_LEVEL_ERROR, e.getMessage(), e);
-				}
-			}
-			try
-			{
-				httpclient.close();
-			}
-			catch (IOException e)
-			{
-//				LogHelper.getInstance().log(LogConstants.LOG_LEVEL_ERROR, e.getMessage(), e);
-			}
-		}
-		return null;
-	}
+            int state = status.getStatusCode();
 
-	public static String httpUploadFile(File file, String url)
-	{
+            if (state == HttpStatus.SC_OK) {
+                HttpEntity responseEntity = response.getEntity();
 
-		CloseableHttpClient httpclient = HttpClients.createDefault();
+                String jsonString = EntityUtils.toString(responseEntity);
 
-		try
-		{
-			HttpPost httppost = new HttpPost(url);
+                return jsonString;
+            }
+        } finally {
 
-			RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(200000).setSocketTimeout(200000).build();
-			
-			httppost.setConfig(requestConfig);
+            if (response != null) {
+                try {
 
-			
-			FileBody bin = new FileBody(file);
-			
-			StringBody comment = new StringBody("This is comment", ContentType.TEXT_PLAIN);
-			
-			HttpEntity reqEntity = MultipartEntityBuilder.create().setMode(HttpMultipartMode.RFC6532).addPart("file", bin).addPart("comment", comment).build();
+                    response.close();
+                } catch (IOException e) {
 
-			httppost.setEntity(reqEntity);
+                    log.error(e.getMessage(), e);
+                }
+            }
+            try {
 
-			System.out.println("executing request " + httppost.getRequestLine());
-			
-			CloseableHttpResponse response = httpclient.execute(httppost);
-			
-			try
-			{
-				
-				System.out.println(response.getStatusLine());
-				
-				HttpEntity resEntity = response.getEntity();
-				
-				if (resEntity != null)
-				{
-					
-					String responseEntityStr = EntityUtils.toString(response.getEntity());
-					
-					return responseEntityStr;
-				}
-				EntityUtils.consume(resEntity);
-			}
-			finally
-			{
-				response.close();
-			}
-		}
-		catch (ClientProtocolException e)
-		{
-			e.printStackTrace();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			try
-			{
-				httpclient.close();
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
-		return null;
-	}
+                httpclient.close();
+            } catch (IOException e) {
 
-	public static String httpUploadFiles(File[] files, String url)
-	{
+                log.error(e.getMessage(), e);
+            }
+        }
+        return null;
+    }
 
-		CloseableHttpClient httpclient = HttpClients.createDefault();
-		try
-		{
-			HttpPost httppost = new HttpPost(url);
+    /**
+     * post请求（用于请求json格式的参数）
+     *
+     * @param url
+     * @param params
+     * @param token
+     * @return
+     */
+    public static String doPost(String url, String params, String tokenKey, String token) throws Exception {
 
-			RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(200000).setSocketTimeout(200000).build();
-			
-			httppost.setConfig(requestConfig);
-			
-			MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create().setMode(HttpMultipartMode.RFC6532);
-			
-			for (int i = 0; i < files.length; i++)
-			{
-				FileBody bin = new FileBody(files[i]);
-				entityBuilder.addPart("file", bin);
-			}
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpPost httpPost = new HttpPost(url);// 创建httpPost
+        httpPost.setHeader("Accept", "application/json");
+        httpPost.setHeader("Content-Type", "application/json");
+        httpPost.setHeader(tokenKey, token);
+        String charSet = "UTF-8";
+        StringEntity entity = new StringEntity(params, charSet);
+        httpPost.setEntity(entity);
+        CloseableHttpResponse response = null;
 
-			StringBody comment = new StringBody("This is comment", ContentType.TEXT_PLAIN);
-			entityBuilder.addPart("comment",comment);
-			httppost.setEntity(entityBuilder.build());
+        try {
 
-			System.out.println("executing request " + httppost.getRequestLine());
-			CloseableHttpResponse response = httpclient.execute(httppost);
-			try
-			{
-				System.out.println(response.getStatusLine());
-				HttpEntity resEntity = response.getEntity();
-				if (resEntity != null)
-				{
-					String responseEntityStr = EntityUtils.toString(response.getEntity());
-					return responseEntityStr;
-				}
-				EntityUtils.consume(resEntity);
-			}
-			finally
-			{
-				response.close();
-			}
-		}
-		catch (ClientProtocolException e)
-		{
-			e.printStackTrace();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			try
-			{
-				httpclient.close();
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
-		return null;
-	}
-	
-	public static void inputStreamUpload(InputStream inputStream, String url)
-	{
+            response = httpclient.execute(httpPost);
+            StatusLine status = response.getStatusLine();
+            int state = status.getStatusCode();
+            if (state == HttpStatus.SC_OK) {
+                HttpEntity responseEntity = response.getEntity();
+                String jsonString = EntityUtils.toString(responseEntity);
+                return jsonString;
+            }
+        } finally {
+            if (response != null) {
+                try {
+                    response.close();
+                } catch (IOException e) {
+                    log.error(e.getMessage(), e);
+                }
+            }
+            try {
+                httpclient.close();
+            } catch (IOException e) {
+//				log.error(e.getMessage(), e);
+            }
+        }
+        return null;
+    }
 
-		CloseableHttpClient client = HttpClients.createDefault();
-		HttpPost post = new HttpPost(url);
-		try
-		{
-			MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-			builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
-			builder.addBinaryBody("uploadFile", inputStream);
-			StringBody stringBody = new StringBody("this is type", ContentType.MULTIPART_FORM_DATA);
-			builder.addPart("id", stringBody);
-			HttpEntity entity = builder.build();
-			post.setEntity(entity);
-			// 发送请求
-			HttpResponse response = client.execute(post);
-			entity = response.getEntity();
-			if (entity != null)
-			{
-				inputStream = entity.getContent();
-				// 转换为字节输入流
-				BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, Consts.UTF_8));
-				String body = null;
-				while ((body = br.readLine()) != null)
-				{
-					System.out.println(body);
-				}
-			}
-		}
-		catch (FileNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-		catch (ClientProtocolException e)
-		{
-			e.printStackTrace();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			if (inputStream != null)
-			{
-				try
-				{
-					inputStream.close();
-				}
-				catch (IOException e)
-				{
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-	
-	public static void main(String[] args) throws Exception {
+    /**
+     * post请求（用于请求json格式的参数）
+     *
+     * @param url
+     * @param params
+     * @param token
+     * @return
+     */
+    public static String doPost(String url, String params, String tokenKey, String token, String contentType) throws Exception {
 
-		String param = "ver:\"3.0\"\n" +
-				"expr\n" +
-				"\"siteSparkAppLoad({ nav:\\\"ids:\\\\\\\"p:beadhouse:r:22dad63c-ade34e40\\\\\\\"\\\", view:\\\"table\\\", dates:\\\"2018-06-01,2018-06-07\\\", rules:\\\"ids:\\\\\\\"default\\\\\\\" opts:\\\\\\\"auxFilter:\\\\\\\\\\\\\\\"not disabled\\\\\\\\\\\\\\\"\\\\\\\"\\\", rollup:\\\"dur\\\", points:\\\"\\\" })\"";
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpPost httpPost = new HttpPost(url);// 创建httpPost
+        httpPost.setHeader("Accept", "application/json");
+        httpPost.setHeader("Content-Type", contentType);
+        httpPost.setHeader(tokenKey, token);
+        String charSet = "UTF-8";
+        StringEntity entity = new StringEntity(params, charSet);
+        httpPost.setEntity(entity);
+        CloseableHttpResponse response = null;
 
-		String result = doPost("http://211.103.208.186:8080/api/beadhouse/eval",param,"Cookie","skyarc-auth-8080=s-QzK4h9P_Tq3e5EwMRINxT6CdeFI9njia2r5gEYfWDYc-6d1","text/zinc; charset=UTF-8");
+        try {
 
-		System.out.println(result);
+            response = httpclient.execute(httpPost);
+            StatusLine status = response.getStatusLine();
+            int state = status.getStatusCode();
+            if (state == HttpStatus.SC_OK) {
+                HttpEntity responseEntity = response.getEntity();
+                String jsonString = EntityUtils.toString(responseEntity);
+                return jsonString;
+            }
+        } finally {
+            if (response != null) {
+                try {
+                    response.close();
+                } catch (IOException e) {
+//					log.error(e.getMessage(), e);
+                }
+            }
+            try {
+                httpclient.close();
+            } catch (IOException e) {
+//				log.error(e.getMessage(), e);
+            }
+        }
+        return null;
+    }
 
-	}
+    /**
+     * post请求（用于请求json格式的参数）
+     *
+     * @param url
+     * @param params
+     * @param token
+     * @return
+     */
+    public static String doFormPost(String url, String params, String tokenKey, String token) throws Exception {
+
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+
+        // 创建httpPost
+        HttpPost httpPost = new HttpPost(url);
+        httpPost.setHeader("Accept", "application/x-www-form-urlencoded");
+        httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        httpPost.setHeader(tokenKey, token);
+
+        String charSet = "UTF-8";
+
+        StringEntity entity = new StringEntity(params, charSet);
+
+        httpPost.setEntity(entity);
+
+        CloseableHttpResponse response = null;
+
+        try {
+
+            response = httpclient.execute(httpPost);
+
+            StatusLine status = response.getStatusLine();
+
+            int state = status.getStatusCode();
+
+            if (state == HttpStatus.SC_OK) {
+                HttpEntity responseEntity = response.getEntity();
+
+                String jsonString = EntityUtils.toString(responseEntity);
+
+                return jsonString;
+            }
+        } finally {
+            if (response != null) {
+                try {
+                    response.close();
+                } catch (IOException e) {
+//					log.error(e.getMessage(), e);
+                }
+            }
+            try {
+                httpclient.close();
+            } catch (IOException e) {
+//				log.error(e.getMessage(), e);
+            }
+        }
+        return null;
+    }
+
+    public static String httpUploadFile(File file, String url) {
+
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+
+        try {
+            HttpPost httppost = new HttpPost(url);
+
+            RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(200000).setSocketTimeout(200000).build();
+
+            httppost.setConfig(requestConfig);
+
+
+            FileBody bin = new FileBody(file);
+
+            StringBody comment = new StringBody("This is comment", ContentType.TEXT_PLAIN);
+
+            HttpEntity reqEntity = MultipartEntityBuilder.create().setMode(HttpMultipartMode.RFC6532).addPart("file", bin).addPart("comment", comment).build();
+
+            httppost.setEntity(reqEntity);
+
+            System.out.println("executing request " + httppost.getRequestLine());
+
+            CloseableHttpResponse response = httpclient.execute(httppost);
+
+            try {
+
+                System.out.println(response.getStatusLine());
+
+                HttpEntity resEntity = response.getEntity();
+
+                if (resEntity != null) {
+
+                    String responseEntityStr = EntityUtils.toString(response.getEntity());
+
+                    return responseEntityStr;
+                }
+                EntityUtils.consume(resEntity);
+            } finally {
+                response.close();
+            }
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                httpclient.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public static String httpUploadFiles(File[] files, String url) {
+
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        try {
+            HttpPost httppost = new HttpPost(url);
+
+            RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(200000).setSocketTimeout(200000).build();
+
+            httppost.setConfig(requestConfig);
+
+            MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create().setMode(HttpMultipartMode.RFC6532);
+
+            for (int i = 0; i < files.length; i++) {
+                FileBody bin = new FileBody(files[i]);
+                entityBuilder.addPart("file", bin);
+            }
+
+            StringBody comment = new StringBody("This is comment", ContentType.TEXT_PLAIN);
+            entityBuilder.addPart("comment", comment);
+            httppost.setEntity(entityBuilder.build());
+
+            System.out.println("executing request " + httppost.getRequestLine());
+            CloseableHttpResponse response = httpclient.execute(httppost);
+            try {
+                System.out.println(response.getStatusLine());
+                HttpEntity resEntity = response.getEntity();
+                if (resEntity != null) {
+                    String responseEntityStr = EntityUtils.toString(response.getEntity());
+                    return responseEntityStr;
+                }
+                EntityUtils.consume(resEntity);
+            } finally {
+                response.close();
+            }
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                httpclient.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public static void inputStreamUpload(InputStream inputStream, String url) {
+
+        CloseableHttpClient client = HttpClients.createDefault();
+        HttpPost post = new HttpPost(url);
+        try {
+            MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+            builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+            builder.addBinaryBody("uploadFile", inputStream);
+            StringBody stringBody = new StringBody("this is type", ContentType.MULTIPART_FORM_DATA);
+            builder.addPart("id", stringBody);
+            HttpEntity entity = builder.build();
+            post.setEntity(entity);
+            // 发送请求
+            HttpResponse response = client.execute(post);
+            entity = response.getEntity();
+            if (entity != null) {
+                inputStream = entity.getContent();
+                // 转换为字节输入流
+                BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, Consts.UTF_8));
+                String body = null;
+                while ((body = br.readLine()) != null) {
+                    System.out.println(body);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+
+        String param = "ver:\"3.0\"\n" +
+                "expr\n" +
+                "\"siteSparkAppLoad({ nav:\\\"ids:\\\\\\\"p:beadhouse:r:22dad63c-ade34e40\\\\\\\"\\\", view:\\\"table\\\", dates:\\\"2018-06-01,2018-06-07\\\", rules:\\\"ids:\\\\\\\"default\\\\\\\" opts:\\\\\\\"auxFilter:\\\\\\\\\\\\\\\"not disabled\\\\\\\\\\\\\\\"\\\\\\\"\\\", rollup:\\\"dur\\\", points:\\\"\\\" })\"";
+
+        String result = doPost("http://211.103.208.186:8080/api/beadhouse/eval", param, "Cookie", "skyarc-auth-8080=s-QzK4h9P_Tq3e5EwMRINxT6CdeFI9njia2r5gEYfWDYc-6d1", "text/zinc; charset=UTF-8");
+
+        System.out.println(result);
+
+    }
 }

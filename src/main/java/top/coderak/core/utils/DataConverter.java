@@ -2,6 +2,7 @@ package top.coderak.core.utils;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.Map;
  * @author dsw
  * @version 1.0 2015/07/05
  */
+@Slf4j
 public class DataConverter {
 
     /**
@@ -38,7 +40,7 @@ public class DataConverter {
         catch (Exception e) {
 
             // 输出错误日志
-//			LogHelper.getInstance().log(e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
 
         // 返回JSON数据
@@ -71,7 +73,7 @@ public class DataConverter {
             catch (Exception e) {
 
                 // 输出错误日志
-//				LogHelper.getInstance().log(e.getMessage(), e);
+                log.error(e.getMessage(), e);
             }
         }
 
@@ -107,7 +109,7 @@ public class DataConverter {
             // 发生异常
             catch (Exception e) {
                 // 输出错误日志
-//				LogHelper.getInstance().log(e.getMessage(),e);
+                log.error(e.getMessage(), e);
             }
         }
         // 返回对象

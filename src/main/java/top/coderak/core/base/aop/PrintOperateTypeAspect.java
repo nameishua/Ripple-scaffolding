@@ -1,5 +1,6 @@
 package top.coderak.core.base.aop;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -17,6 +18,7 @@ import java.lang.reflect.Method;
  * @date 2019/9/9 0009
  * @return
  */
+@Slf4j
 @Aspect
 @Component
 public class PrintOperateTypeAspect {
@@ -36,7 +38,11 @@ public class PrintOperateTypeAspect {
 
         System.out.println(printOperateType.type());
 
-        System.out.println(PrintOperateTypeEnum.getTypeString(printOperateType.type()));
+        String value = PrintOperateTypeEnum.getTypeString(printOperateType.type());
+
+        System.out.println(value);
+
+        log.info(value);
 
         //执行方法
         Object object = point.proceed();

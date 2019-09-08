@@ -1,5 +1,6 @@
 package top.coderak.core.kafka;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -15,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+@Slf4j
 @Component
 @EnableScheduling
 public class KafkaSender {
@@ -58,6 +60,8 @@ public class KafkaSender {
         map.put("Topic", "aktest");
 
         map.put("Data", "测试数据：" + MD5Utils.string2MD5(new Random().toString()) + new Date());
+
+        log.info(map.toString());
 
         sendChannel("aktest", map.toString());
     }
