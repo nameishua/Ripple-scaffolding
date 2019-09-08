@@ -22,7 +22,9 @@
         E:Spring Boot Banner;
         F:SpringCloud;
         G:Kafka
-        H:定时任务@Scheduled    
+        H:定时任务@Scheduled 
+        I:自定义注解&切入点   
+------
 [关于Cron表达式](http://coderak.top/#/view/33)
 
 ------

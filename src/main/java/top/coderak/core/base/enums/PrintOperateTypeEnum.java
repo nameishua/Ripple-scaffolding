@@ -1,11 +1,11 @@
-package top.coderak.core.base.annotation;
+package top.coderak.core.base.enums;
 
 // 类型
-public enum AnoEnum {
+public enum PrintOperateTypeEnum {
 
 	ADD, UPDATE, DELETE, SELECT, DEFAULT;
 
-	public static String getTypeString(AnoEnum str) {
+	public static String getTypeString(PrintOperateTypeEnum str) {
 
 		switch (str) {
 

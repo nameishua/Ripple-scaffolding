@@ -62,16 +62,24 @@ public class ShiroController extends BaseController {
         if (subject.isAuthenticated()) {
 
             Map<String , Object> map = new HashMap<>();
+
             map.put("statusCode","1001");
+
             map.put("statusName","登录成功");
+
             map.put("userName",token.getUsername());
+
             writeSuccessResult(map);
         } else {
 
             token.clear();
+
             Map<String , Object> map = new HashMap<>();
+
             map.put("statusCode","0001");
+
             map.put("statusName","登录失败");
+
             writeSuccessResult(map);
         }
     }

@@ -1,9 +1,8 @@
 /*
 SQLyog Professional v12.08 (64 bit)
-MySQL - 5.7.26 : Database - ripple
+MySQL - 5.7.27 : Database - ripple
 *********************************************************************
-*/
-
+*/
 
 /*!40101 SET NAMES utf8 */;
 
@@ -35,7 +34,7 @@ CREATE TABLE `sequence` (
 
 /*Data for the table `sequence` */
 
-insert  into `sequence`(`id`,`type`,`sequence`,`create_by`,`create_date`,`update_by`,`update_date`,`flag`) values ('07260013212290001','USER',0000000001,'admin','2019-07-26 00:13:21','admin','2019-07-26 00:13:21','新建'),('07260014347840003','USER',0000000002,'admin','2019-07-26 00:14:35','admin','2019-07-26 00:14:35','新建');
+insert  into `sequence`(`id`,`type`,`sequence`,`create_by`,`create_date`,`update_by`,`update_date`,`flag`) values ('07260013212290001','USER',0000000001,'admin','2019-07-26 00:13:21','admin','2019-07-26 00:13:21','新建'),('07260014347840003','USER',0000000002,'admin','2019-07-26 00:14:35','admin','2019-07-26 00:14:35','新建'),('07260104156070001','USER',0000000003,'admin','2019-07-26 01:04:16','admin','2019-07-26 01:04:16','新建');
 
 /*Table structure for table `user` */
 
@@ -52,14 +51,15 @@ CREATE TABLE `user` (
   `flag` varchar(255) DEFAULT NULL COMMENT '标记',
   `sort` int(64) DEFAULT NULL COMMENT '排序号',
   `password` varchar(64) DEFAULT NULL COMMENT '密码',
-  `account` varchar(64) DEFAULT NULL COMMENT '账号',
+  `account` varchar(64) NOT NULL COMMENT '账号',
   `code` varchar(64) DEFAULT NULL COMMENT '编码',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `account` (`account`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `user` */
 
-insert  into `user`(`id`,`name`,`age`,`create_by`,`create_date`,`update_by`,`update_date`,`flag`,`sort`,`password`,`account`,`code`) values ('07251713305620000','admin',25,'test','2019-07-25 17:13:31','test','2019-07-25 17:17:05','新建',NULL,'202cb962ac59075b964b07152d234b70','admin','USER'),('0726001321820000','ak-test-3',25,'admin','2019-07-26 00:13:21','admin','2019-07-26 00:13:21','新建',NULL,'202cb962ac59075b964b07152d234b70','ak-test-3@126.top','USER0000'),('07260014347050002','ak',25,'admin','2019-07-26 00:14:35','admin','2019-07-26 00:14:35','新建',NULL,'202cb962ac59075b964b07152d234b70','ak@126.top','USER0001');
+insert  into `user`(`id`,`name`,`age`,`create_by`,`create_date`,`update_by`,`update_date`,`flag`,`sort`,`password`,`account`,`code`) values ('07251713305620000','admin',25,'test','2019-07-25 17:13:31','test','2019-07-25 17:17:05','新建',NULL,'202cb962ac59075b964b07152d234b70','admin','USER'),('0726001321820000','bb',25,'admin','2019-07-26 00:13:21','admin','2019-07-26 00:13:21','新建',NULL,'202cb962ac59075b964b07152d234b70','ak-test-3@126.com','USER0000'),('07260014347050002','cc',25,'admin','2019-07-26 00:14:35','admin','2019-07-26 00:14:35','新建',NULL,'202cb962ac59075b964b07152d234b70','ak@126.com','USER0001'),('07260104154220000','aaa',25,'admin','2019-07-26 01:04:16','admin','2019-09-08 10:35:38','更新',NULL,'202cb962ac59075b964b07152d234b70','aaa','USER0002');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

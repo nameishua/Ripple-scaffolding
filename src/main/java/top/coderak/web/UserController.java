@@ -1,18 +1,17 @@
 package top.coderak.web;
 
-import top.coderak.core.base.controller.BaseController;
-import top.coderak.core.base.manager.BaseCRUDManager;
-import top.coderak.core.utils.ObjectUtil;
-import top.coderak.entity.User;
-import top.coderak.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import top.coderak.core.base.annotation.AvoidRepeatableCommit;
+import top.coderak.core.base.annotation.PrintOperateType;
 import top.coderak.core.base.controller.BaseController;
+import top.coderak.core.base.enums.PrintOperateTypeEnum;
 import top.coderak.core.base.manager.BaseCRUDManager;
 import top.coderak.core.utils.ObjectUtil;
+import top.coderak.entity.User;
 import top.coderak.service.UserService;
 
 import java.lang.reflect.InvocationTargetException;
@@ -41,10 +40,10 @@ public class UserController extends BaseController {
      * @author zyh
      * @date 2019/7/21 0021
      */
+    @AvoidRepeatableCommit
+    @PrintOperateType(type = PrintOperateTypeEnum.ADD)
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     public void addUser() {
-
-        System.out.println("新增...");
 
         String id = getParam("id");
 
@@ -73,12 +72,11 @@ public class UserController extends BaseController {
      * @author zyh
      * @date 2019/7/21 0021
      */
+    @PrintOperateType(type = PrintOperateTypeEnum.DELETE)
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
     public void delete() {
 
         String id = getParam("id");
-
-        System.out.println("删除...");
 
         userService.deleteUser(id);
 
@@ -93,10 +91,9 @@ public class UserController extends BaseController {
      * @author zyh
      * @date 2019/7/21 0021
      */
+    @PrintOperateType(type = PrintOperateTypeEnum.SELECT)
     @RequestMapping(value = "/findUserByName", method = RequestMethod.POST)
     public User findByUserName(@RequestParam(value = "userName", required = true) String userName) {
-
-        System.out.println("查询...");
 
         return userService.findUserByName(userName);
     }
@@ -109,10 +106,9 @@ public class UserController extends BaseController {
      * @author zyh
      * @date 2019/7/21 0021
      */
+    @PrintOperateType(type = PrintOperateTypeEnum.SELECT)
     @RequestMapping(value = "/findAllAnnotation", method = RequestMethod.POST)
     public void findAllAnnotation() {
-
-        System.out.println("查询所有数据...");
 
         writeSuccessResult(userService.findAllAnnotation());
     }
@@ -132,11 +128,10 @@ public class UserController extends BaseController {
      * @author zyh
      * @date 2019/7/21 0021
      */
+    @PrintOperateType(type = PrintOperateTypeEnum.SELECT)
     @RequestMapping(value = "/findAllXml", method = RequestMethod.POST)
     public void findAllXml() throws NoSuchMethodException, SecurityException, IllegalAccessException,
             IllegalArgumentException, InvocationTargetException, InstantiationException, ClassNotFoundException {
-
-        System.out.println("查询所有数据...");
 
         writeSuccessResult(userService.findAllXml());
     }
@@ -149,10 +144,9 @@ public class UserController extends BaseController {
      * @author zyh
      * @date 2019/7/21 0021
      */
+    @PrintOperateType(type = PrintOperateTypeEnum.SELECT)
     @RequestMapping(value = "/findAllBase", method = RequestMethod.POST)
     public void findAllBase() {
-
-        System.out.println("查询所有数据...");
 
         User user = new User();
 
@@ -178,10 +172,9 @@ public class UserController extends BaseController {
      * @author zyh
      * @date 2019/7/25 0021
      */
+    @PrintOperateType(type = PrintOperateTypeEnum.SELECT)
     @RequestMapping(value = "/findAllByMyPlus", method = RequestMethod.POST)
     public void findAllByMyPlus() {
-
-        System.out.println("开始查询所有数据...");
 
         String name = getParam("name");
 
@@ -203,6 +196,7 @@ public class UserController extends BaseController {
      * @author zyh
      * @date 2019/7/25 0021
      */
+    @PrintOperateType(type = PrintOperateTypeEnum.SELECT)
     @RequestMapping(value = "/findPage", method = RequestMethod.POST)
     public void findPage() throws NumberFormatException, IllegalAccessException, IllegalArgumentException,
             InvocationTargetException, InstantiationException, NoSuchMethodException, SecurityException {
