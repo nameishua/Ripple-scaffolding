@@ -24,7 +24,7 @@
         G:Kafka
         H:定时任务@Scheduled 
         I:自定义注解&切入点   
-        J:Slf4j
+        J:log4j2
 ------
 [关于Cron表达式](http://coderak.top/#/view/33)
 
