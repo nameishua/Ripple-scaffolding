@@ -2,6 +2,7 @@ package top.coderak.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
+import org.springframework.transaction.annotation.Transactional;
 import top.coderak.core.base.constants.SequenceConstants;
 import top.coderak.core.base.manager.impl.BaseCRUDManagerImpl;
 import top.coderak.core.utils.GenerateSequenceUtil;
@@ -22,6 +23,7 @@ public class SequenceServiceImpl extends BaseCRUDManagerImpl<Sequence> implement
     @Autowired
     private SequenceMapper sequenceMapper;
 
+    @Transactional
     public String getSequence(String type) {
 
         System.out.println(type);

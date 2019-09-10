@@ -1,5 +1,6 @@
 package top.coderak.service.impl;
 
+import org.springframework.transaction.annotation.Transactional;
 import top.coderak.core.base.bean.PageInfo;
 import top.coderak.core.base.constants.UserConstants;
 import top.coderak.core.base.manager.impl.BaseCRUDManagerImpl;
@@ -38,6 +39,7 @@ public class UserServiceImpl<T> extends BaseCRUDManagerImpl<User> implements Use
     SequenceServiceImpl sequenceServiceImpl;
 
     @Override
+    @Transactional
     public boolean addUser(String name, String age, String id, String flag, String sort, String password,
                            String account) {
 
@@ -106,6 +108,7 @@ public class UserServiceImpl<T> extends BaseCRUDManagerImpl<User> implements Use
     }
 
     @Override
+    @Transactional
     public boolean deleteUser(String id) {
 
         boolean flag = false;
