@@ -4,6 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 //import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -14,7 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 //单体注掉
-//@EnableDiscoveryClient
+@EnableDiscoveryClient
 @ComponentScan(basePackages = {"top.coderak"})
 @MapperScan(basePackages = {"top.coderak.mapper", "top.coderak.core.base.mapper"})
 public class RippleApp {
