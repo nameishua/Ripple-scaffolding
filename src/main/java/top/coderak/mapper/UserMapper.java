@@ -1,55 +1,40 @@
 package top.coderak.mapper;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
-import top.coderak.entity.User;
 import org.apache.ibatis.annotations.*;
+import top.coderak.entity.User;
 
 import java.util.List;
 
-/**
- * 功能描述
- *
- * @author zyh
- * @date 2019/7/21 0021
- */
 @Mapper
-public interface UserMapper extends BaseMapper<User> {
-    /**
-     * 用户数据新增
-     */
+public interface UserMapper {
     @Insert("insert into user(id,name,age) values (#{id},#{name},#{age})")
-    void addUser(User user);
+    int addUser(User user);
 
-    /**
-     * 用户数据修改
-     */
     @Update("update user set name=#{name},age=#{age} where id=#{id}")
-    void updateUser(User user);
+    int updateUser(User user);
 
-    /**
-     * 用户数据删除
-     */
     @Delete("delete from user where id=#{id}")
-    void deleteUser(String id);
+    int deleteUser(String id);
 
-    /**
-     * 根据用户名称查询用户信息
-     */
     @Select("SELECT * FROM user where name=#{userName}")
     User findByName(@Param("userName") String userName);
 
-    /**
-     * 查询所有(注解)
-     */
-    @Select("SELECT * FROM user")
+    @Select("SELECT * FROM user WHERE flag != '删除'")
     List<User> findAllAnnotation();
 
-    /**
-     * 查询所有（xml）
-     */
     List<User> findAllXml();
 
-    User selectByAccount(String account);
+    @Select("SELECT * FROM user WHERE account = #{account}")
+    User selectByAccount(@Param("account") String account);
 
+    @Select("SELECT * FROM user WHERE id = #{id}")
+    User selectById(@Param("id") String id);
 
+    @Insert("INSERT INTO user (id, name, age, account, password, flag, sort, code, create_by, create_date, update_by, update_date) " +
+            "VALUES (#{id}, #{name}, #{age}, #{account}, #{password}, #{flag}, #{sort}, #{code}, #{createBy}, #{createDate}, #{updateBy}, #{updateDate})")
+    int insert(User user);
+
+    @Update("UPDATE user SET name=#{name}, age=#{age}, account=#{account}, password=#{password}, flag=#{flag}, " +
+            "sort=#{sort}, code=#{code}, update_by=#{updateBy}, update_date=#{updateDate} WHERE id=#{id}")
+    int updateById(User user);
 }

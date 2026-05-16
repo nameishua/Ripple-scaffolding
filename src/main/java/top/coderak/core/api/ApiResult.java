@@ -2,9 +2,6 @@ package top.coderak.core.api;
 
 import java.time.LocalDateTime;
 
-/**
- * Unified JSON response wrapper for new APIs.
- */
 public class ApiResult<T> {
 
     private boolean success;
@@ -15,6 +12,14 @@ public class ApiResult<T> {
 
     public ApiResult() {
         this.timestamp = LocalDateTime.now();
+    }
+
+    public static <T> ApiResult<T> ok() {
+        ApiResult<T> result = new ApiResult<T>();
+        result.setSuccess(true);
+        result.setCode("0");
+        result.setMessage("success");
+        return result;
     }
 
     public static <T> ApiResult<T> ok(T data) {

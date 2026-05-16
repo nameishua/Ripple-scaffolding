@@ -1,15 +1,15 @@
 package top.coderak.core.base.config;
 
-import top.coderak.core.utils.MD5Utils;
-import top.coderak.entity.User;
-import top.coderak.mapper.UserMapper;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+import top.coderak.core.utils.JWTUtils;
+import top.coderak.core.utils.MD5Utils;
+import top.coderak.entity.User;
+import top.coderak.mapper.UserMapper;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,11 +19,16 @@ public class CustomRealm extends AuthorizingRealm {
     @Autowired
     private UserMapper userMapper;
 
+    @Override
+    public boolean supports(AuthenticationToken token) {
+        return token instanceof JWTToken || token instanceof UsernamePasswordToken;
+    }
+
     @SuppressWarnings("unused")
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
 
-        String username = (String) SecurityUtils.getSubject().getPrincipal();
+        String username = (String) principalCollection.getPrimaryPrincipal();
 
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 
@@ -42,11 +47,28 @@ public class CustomRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken)
             throws AuthenticationException {
 
+        if (authenticationToken instanceof JWTToken) {
+            return doJWTAuthentication((JWTToken) authenticationToken);
+        } else {
+            return doPasswordAuthentication((UsernamePasswordToken) authenticationToken);
+        }
+    }
+
+    private AuthenticationInfo doJWTAuthentication(JWTToken jwtToken) {
+        String token = (String) jwtToken.getCredentials();
+        if (!JWTUtils.validateToken(token)) {
+            throw new AuthenticationException("Token is invalid");
+        }
+        String account = JWTUtils.getAccount(token);
+        return new SimpleAuthenticationInfo(account, token, getName());
+    }
+
+    private AuthenticationInfo doPasswordAuthentication(UsernamePasswordToken token) {
         System.out.println("-------身份认证方法--------");
 
-        String account = (String) authenticationToken.getPrincipal();
+        String account = (String) token.getPrincipal();
 
-        String userPwd = new String((char[]) authenticationToken.getCredentials());
+        String userPwd = new String((char[]) token.getCredentials());
 
         User user = new User();
 

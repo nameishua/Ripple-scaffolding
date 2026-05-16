@@ -1,12 +1,16 @@
 package top.coderak.core.base.config;
 
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
+import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -25,31 +29,35 @@ public class ShiroConfig {
 
         shiroFilterFactoryBean.setUnauthorizedUrl("/notRole");
 
+        Map<String, Filter> filters = new HashMap<>();
+        filters.put("jwt", new JWTFilter());
+        shiroFilterFactoryBean.setFilters(filters);
+
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
 
-        // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
         filterChainDefinitionMap.put("/login/**", "anon");
-
         filterChainDefinitionMap.put("/framework/**", "anon");
-
         filterChainDefinitionMap.put("/actuator/**", "anon");
 
-        // Swagger API文档配置
         filterChainDefinitionMap.put("/swagger-ui.html", "anon");
         filterChainDefinitionMap.put("/swagger-resources/**", "anon");
         filterChainDefinitionMap.put("/v2/api-docs", "anon");
         filterChainDefinitionMap.put("/webjars/**", "anon");
 
-        filterChainDefinitionMap.put("/user/**", "authc");
-
-        filterChainDefinitionMap.put("/sequence/**", "authc");
-
-        filterChainDefinitionMap.put("/druid/**", "anon");
+        filterChainDefinitionMap.put("/index.html", "anon");
+        filterChainDefinitionMap.put("/js/**", "anon");
+        filterChainDefinitionMap.put("/css/**", "anon");
+        filterChainDefinitionMap.put("/images/**", "anon");
 
         filterChainDefinitionMap.put("/h2-console/**", "anon");
 
-        // 主要这行代码必须放在所有权限设置的最后，不然会导致所有 url 都被拦截 剩余的都需要认证
-        filterChainDefinitionMap.put("/**", "authc");
+        filterChainDefinitionMap.put("/admin/**", "jwt");
+        filterChainDefinitionMap.put("/user/**", "jwt");
+        filterChainDefinitionMap.put("/sequence/**", "jwt");
+
+        filterChainDefinitionMap.put("/druid/**", "anon");
+
+        filterChainDefinitionMap.put("/**", "jwt");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
@@ -64,31 +72,26 @@ public class ShiroConfig {
 
         defaultSecurityManager.setRealm(customRealm());
 
+        DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
+        DefaultSessionStorageEvaluator sessionStorageEvaluator = new DefaultSessionStorageEvaluator();
+        sessionStorageEvaluator.setSessionStorageEnabled(false);
+        subjectDAO.setSessionStorageEvaluator(sessionStorageEvaluator);
+        defaultSecurityManager.setSubjectDAO(subjectDAO);
+
         return defaultSecurityManager;
     }
 
     @Bean
     public CustomRealm customRealm() {
-
-        CustomRealm customRealm = new CustomRealm();
-
-        return customRealm;
+        return new CustomRealm();
     }
 
     @Bean(name = "credentialsMatcher")
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
-
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-
-        // 散列算法:这里使用MD5算法;
         hashedCredentialsMatcher.setHashAlgorithmName("md5");
-
-        // 散列的次数，比如散列两次，相当于 md5(md5(""));
-        hashedCredentialsMatcher.setHashIterations(2);
-
-        // storedCredentialsHexEncoded默认是true，此时用的是密码加密用的是Hex编码；false时用Base64编码
+        hashedCredentialsMatcher.setHashIterations(1);
         hashedCredentialsMatcher.setStoredCredentialsHexEncoded(true);
-
         return hashedCredentialsMatcher;
     }
 

@@ -5,18 +5,18 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.ExcessiveAttemptsException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import top.coderak.core.api.ApiResult;
+import top.coderak.core.utils.JWTUtils;
+import top.coderak.entity.User;
+import top.coderak.mapper.UserMapper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +25,9 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/login")
 public class ShiroController {
+
+    @Autowired
+    private UserMapper userMapper;
 
     @ApiOperation("默认登录页")
     @GetMapping(value = "/check")
@@ -42,27 +45,23 @@ public class ShiroController {
 
         try {
             subject.login(token);
-        } catch (UnknownAccountException e) {
-            return ApiResult.fail("Unknown account.");
-        } catch (IncorrectCredentialsException e) {
-            return ApiResult.fail("Incorrect password.");
-        } catch (LockedAccountException e) {
-            return ApiResult.fail("Account locked.");
-        } catch (ExcessiveAttemptsException e) {
-            return ApiResult.fail("Too many login attempts.");
         } catch (AuthenticationException e) {
-            return ApiResult.fail("Invalid username or password.");
+            return ApiResult.fail("Invalid username or password");
         }
 
         if (!subject.isAuthenticated()) {
             token.clear();
-            return ApiResult.fail("Login failed.");
+            return ApiResult.fail("Login failed");
         }
 
-        Map<String, Object> data = new HashMap<String, Object>();
+        User user = userMapper.selectByAccount(account);
+        String jwtToken = JWTUtils.generateToken(account, user.getName());
+
+        Map<String, Object> data = new HashMap<>();
         data.put("statusCode", "1001");
         data.put("statusName", "Login success");
-        data.put("userName", token.getUsername());
+        data.put("userName", account);
+        data.put("token", jwtToken);
         return ApiResult.ok(data);
     }
 }

@@ -1,15 +1,16 @@
 package top.coderak.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import top.coderak.core.base.bean.BaseBean;
 import top.coderak.core.base.constants.MySqlTypeConstant;
 import top.coderak.core.base.sqlTool.Column;
 import top.coderak.core.base.sqlTool.Table;
 
-/**
- * User entity.
- */
+import java.util.List;
+
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "user")
 public class User extends BaseBean {
 
@@ -34,8 +35,6 @@ public class User extends BaseBean {
     @Column(name = "code", type = MySqlTypeConstant.VARCHAR, length = 64)
     private String code;
 
-    public String show() {
-        System.out.println("Reflection demo");
-        return "ok";
-    }
+    private List<String> roleIds;
+    private List<Role> roles;
 }
