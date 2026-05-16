@@ -1,36 +1,94 @@
-# Ripple
-@ coderak.top aka ak
+# Ripple Scaffolding
 
-------------------------------------------------------------------------
+Ripple is a Java enterprise scaffolding project based on Spring Boot, MyBatis-Plus, Shiro, Druid, Redis and Kafka.
 
-个人学习
+This fork is being modernized with one clear goal: become a cleaner, safer and more extensible framework than a traditional admin scaffold.
 
-        1.2.1:
-        
-        A:Basecrud;
-        B:Mybatis Plus
-        C:Shiro
-        D:lombok:
-            @Data   ：注解在类上；提供类所有属性的 getting 和 setting 方法，此外还提供了equals、canEqual、hashCode、toString 方法
-            @Setter：注解在属性上；为属性提供 setting 方法
-            @Getter：注解在属性上；为属性提供 getting 方法
-            @Log4j ：注解在类上；为类提供一个 属性名为log 的 log4j 日志对象
-            @NoArgsConstructor：注解在类上；为类提供一个无参的构造方法
-            @AllArgsConstructor：注解在类上；为类提供一个全参的构造方法
-            @NonNull该注解快速判断是否为空,如果为空,则抛出java.lang.NullPointerException
-            @Synchronized该注解自动添加到同步机制,有趣的是,生成的代码并不是直接锁方法,而是锁代码块， 作用范围是方法上;
-        E:Spring Boot Banner;
-        F:SpringCloud;
-        G:Kafka
-        H:定时任务@Scheduled 
-        I:自定义注解&切入点   
-        J:log4j2
-------
-[关于Cron表达式](http://coderak.top/#/view/33)
+## Current Baseline
 
-------
+- Java 8 compatible source level
+- Spring Boot 2.1.x
+- MyBatis-Plus and XML mapper support
+- Shiro authentication
+- Druid datasource monitoring
+- Redis and Kafka integration points
+- Unified JSON response wrapper for new APIs
+- Global REST exception handling
+- Actuator health/info endpoints
+- Environment-variable based configuration
 
-![image](https://raw.githubusercontent.com/nameishua/Zuul-gateway/master/src/main/resources/static/46c48e0b28ce0a91c821cd22ab94748.png)
+## Quick Start
 
-------
+1. Create a MySQL database named `ripple`.
+2. Import `src/main/resources/sql/ripple.sql`.
+3. Configure environment variables when your local defaults differ:
 
+```powershell
+$env:RIPPLE_DATASOURCE_URL="jdbc:mysql://127.0.0.1:3306/ripple?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai"
+$env:RIPPLE_DATASOURCE_USERNAME="root"
+$env:RIPPLE_DATASOURCE_PASSWORD="your-password"
+```
+
+4. Start the application:
+
+```powershell
+mvn spring-boot:run
+```
+
+5. Open:
+
+- `http://localhost:8883/ripple/framework/info`
+- `http://localhost:8883/ripple/actuator/health`
+
+## Why This Is Moving Beyond Guns
+
+Guns is strong because it is modern, modular and productized. Ripple will compete by focusing on:
+
+- secure-by-default configuration with no committed passwords
+- plugin-ready backend modules
+- code-generation-ready metadata
+- clean API contracts
+- progressive migration instead of risky rewrites
+- cloud-native defaults for observability, health checks and externalized config
+
+## Modernization Roadmap
+
+### Phase 1: Foundation
+
+- Replace hard-coded infrastructure addresses with environment variables.
+- Add unified API response and global exception handling.
+- Add framework metadata and health endpoints.
+- Stabilize Maven dependency resolution.
+- Repair README and broken source encoding issues.
+
+### Phase 2: Framework Core
+
+- Upgrade authentication from legacy Shiro-only flows to token-ready security.
+- Add module boundaries for system, auth, generator, file, job and audit.
+- Add Flyway database migrations.
+- Add operation log and login log persistence.
+- Add OpenAPI documentation.
+
+### Phase 3: Productivity
+
+- Add code generator for entity, mapper, service, controller and CRUD pages.
+- Add plugin SPI and starter-style module packaging.
+- Add multi-datasource support.
+- Add background job management.
+- Add server and cache monitoring endpoints.
+
+### Phase 4: Product Experience
+
+- Add a Vue 3 or React admin console.
+- Add dashboard, user, role, menu, organization, dictionary and config management.
+- Add deployment templates for Docker and CI.
+
+## Maven
+
+Recommended local Maven repository:
+
+`D:/MavenRepository`
+
+The current development machine is configured with Maven under:
+
+`D:/DevTools/apache-maven-3.9.9`

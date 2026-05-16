@@ -1,87 +1,64 @@
 package top.coderak.web;
 
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.ExcessiveAttemptsException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import top.coderak.core.base.controller.BaseController;
+import top.coderak.core.api.ApiResult;
 
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
- * UserController
- *
- * @author zyh
- * @date 2019/7/21 0021
+ * Authentication endpoints.
  */
 @RestController
 @RequestMapping(value = "/login")
-public class ShiroController extends BaseController {
+public class ShiroController {
 
-    @RequestMapping(value = "/check", method = RequestMethod.GET)
-    public void defaultLogin() {
-
-        writeSuccessResult("请登录");
+    @GetMapping(value = "/check")
+    public ApiResult<String> defaultLogin() {
+        return ApiResult.fail("Please login first.");
     }
 
-
-    @RequestMapping(value = "/check", method = RequestMethod.POST)
-    public void login(@RequestParam("account") String account, @RequestParam("password") String password) {
-
-        // 从SecurityUtils里边创建一个 subject
+    @PostMapping(value = "/check")
+    public ApiResult<Map<String, Object>> login(@RequestParam("account") String account,
+                                                @RequestParam("password") String password) {
         Subject subject = SecurityUtils.getSubject();
-
-        // 在认证提交前准备 token（令牌）
         UsernamePasswordToken token = new UsernamePasswordToken(account, password);
 
-        // 执行认证登陆
         try {
-
             subject.login(token);
-        } catch (UnknownAccountException uae) {
-
-            writeSuccessResult("未知账户");
-        } catch (IncorrectCredentialsException ice) {
-
-            writeSuccessResult("密码不正确");
-        } catch (LockedAccountException lae) {
-
-            writeSuccessResult("账户已锁定");
-        } catch (ExcessiveAttemptsException eae) {
-
-            writeSuccessResult("用户名或密码错误次数过多");
-        } catch (AuthenticationException ae) {
-
-            writeSuccessResult("用户名或密码不正确！");
+        } catch (UnknownAccountException e) {
+            return ApiResult.fail("Unknown account.");
+        } catch (IncorrectCredentialsException e) {
+            return ApiResult.fail("Incorrect password.");
+        } catch (LockedAccountException e) {
+            return ApiResult.fail("Account locked.");
+        } catch (ExcessiveAttemptsException e) {
+            return ApiResult.fail("Too many login attempts.");
+        } catch (AuthenticationException e) {
+            return ApiResult.fail("Invalid username or password.");
         }
-        if (subject.isAuthenticated()) {
 
-            Map<String , Object> map = new HashMap<>();
-
-            map.put("statusCode","1001");
-
-            map.put("statusName","登录成功");
-
-            map.put("userName",token.getUsername());
-
-            writeSuccessResult(map);
-        } else {
-
+        if (!subject.isAuthenticated()) {
             token.clear();
-
-            Map<String , Object> map = new HashMap<>();
-
-            map.put("statusCode","0001");
-
-            map.put("statusName","登录失败");
-
-            writeSuccessResult(map);
+            return ApiResult.fail("Login failed.");
         }
-    }
 
+        Map<String, Object> data = new HashMap<String, Object>();
+        data.put("statusCode", "1001");
+        data.put("statusName", "Login success");
+        data.put("userName", token.getUsername());
+        return ApiResult.ok(data);
+    }
 }
