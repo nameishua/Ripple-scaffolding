@@ -1,5 +1,7 @@
 package top.coderak.modules.system.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.core.SpringVersion;
@@ -11,9 +13,7 @@ import top.coderak.core.api.ApiResult;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * Framework metadata and readiness endpoint.
- */
+@Api(tags = "系统信息接口")
 @RestController
 @RequestMapping("/framework")
 public class FrameworkController {
@@ -24,6 +24,7 @@ public class FrameworkController {
     @Value("${spring.profiles.active:default}")
     private String activeProfile;
 
+    @ApiOperation("获取系统信息")
     @GetMapping("/info")
     public ApiResult<Map<String, Object>> info() {
         Map<String, Object> data = new LinkedHashMap<String, Object>();

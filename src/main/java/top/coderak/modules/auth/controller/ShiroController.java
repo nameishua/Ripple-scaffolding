@@ -1,5 +1,8 @@
 package top.coderak.modules.auth.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
@@ -18,21 +21,22 @@ import top.coderak.core.api.ApiResult;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Authentication endpoints.
- */
+@Api(tags = "认证管理接口")
 @RestController
 @RequestMapping(value = "/login")
 public class ShiroController {
 
+    @ApiOperation("默认登录页")
     @GetMapping(value = "/check")
     public ApiResult<String> defaultLogin() {
         return ApiResult.fail("Please login first.");
     }
 
+    @ApiOperation("用户登录")
     @PostMapping(value = "/check")
-    public ApiResult<Map<String, Object>> login(@RequestParam("account") String account,
-                                                @RequestParam("password") String password) {
+    public ApiResult<Map<String, Object>> login(
+            @ApiParam(value = "账号", required = true) @RequestParam("account") String account,
+            @ApiParam(value = "密码", required = true) @RequestParam("password") String password) {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(account, password);
 
