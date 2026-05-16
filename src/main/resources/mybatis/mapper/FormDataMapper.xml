@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.coderak.mapper.FormDataMapper">
+
+    <select id="selectAll" resultType="top.coderak.entity.FormData">
+        SELECT * FROM rp_form_data WHERE flag = '启用' ORDER BY create_date DESC
+    </select>
+
+    <select id="selectByFormCode" resultType="top.coderak.entity.FormData">
+        SELECT * FROM rp_form_data WHERE form_code = #{formCode} AND flag = '启用' ORDER BY create_date DESC
+    </select>
+
+    <select id="selectById" resultType="top.coderak.entity.FormData">
+        SELECT * FROM rp_form_data WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="top.coderak.entity.FormData">
+        INSERT INTO rp_form_data (id, form_code, business_key, data_json, status, submitter,
+            create_by, create_date, update_by, update_date, flag)
+        VALUES (#{id}, #{formCode}, #{businessKey}, #{dataJson}, #{status}, #{submitter},
+            #{createBy}, #{createDate}, #{updateBy}, #{updateDate}, #{flag})
+    </insert>
+
+    <update id="updateById" parameterType="top.coderak.entity.FormData">
+        UPDATE rp_form_data SET data_json = #{dataJson}, status = #{status},
+            update_by = #{updateBy}, update_date = #{updateDate}, flag = #{flag}
+        WHERE id = #{id}
+    </update>
+</mapper>

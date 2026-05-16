@@ -71,4 +71,27 @@ export const getAllPermissions = () => api.get('/admin/role/permissions')
 
 export const assignPermissions = (roleId, permissionIds) => api.post('/admin/role/assignPermissions', permissionIds, { params: { roleId } })
 
+export const getFormDefinitionList = () => api.get('/admin/form/definition/list')
+export const getPublishedFormDefinitions = () => api.get('/admin/form/definition/published')
+export const getFormDefinitionByCode = (code) => api.get(`/admin/form/definition/code/${code}`)
+export const addFormDefinition = (data) => api.post('/admin/form/definition/add', data)
+export const updateFormDefinition = (data) => api.post('/admin/form/definition/update', data)
+export const deleteFormDefinition = (id) => api.post('/admin/form/definition/delete', null, { params: { id } })
+export const publishFormDefinition = (id) => api.post('/admin/form/definition/publish', null, { params: { id } })
+export const getFormDataList = (formCode) => api.get('/admin/form/data/list', { params: formCode ? { formCode } : {} })
+export const submitFormData = (body) => api.post('/admin/form/data/submit', body)
+
+export const getWorkflowDefinitionList = () => api.get('/admin/workflow/definition/list')
+export const getPublishedWorkflowDefinitions = () => api.get('/admin/workflow/definition/published')
+export const addWorkflowDefinition = (data) => api.post('/admin/workflow/definition/add', data)
+export const updateWorkflowDefinition = (data) => api.post('/admin/workflow/definition/update', data)
+export const deleteWorkflowDefinition = (id) => api.post('/admin/workflow/definition/delete', null, { params: { id } })
+export const publishWorkflowDefinition = (id) => api.post('/admin/workflow/definition/publish', null, { params: { id } })
+export const getWorkflowInstanceList = () => api.get('/admin/workflow/instance/list')
+export const startWorkflow = (body) => api.post('/admin/workflow/instance/start', body)
+export const getWorkflowTodoTasks = () => api.get('/admin/workflow/task/todo')
+export const getWorkflowTasks = (instanceId) => api.get('/admin/workflow/task/list', { params: { instanceId } })
+export const approveWorkflowTask = (taskId, comment) => api.post('/admin/workflow/task/approve', null, { params: { taskId, comment } })
+export const rejectWorkflowTask = (taskId, comment) => api.post('/admin/workflow/task/reject', null, { params: { taskId, comment } })
+
 export default api

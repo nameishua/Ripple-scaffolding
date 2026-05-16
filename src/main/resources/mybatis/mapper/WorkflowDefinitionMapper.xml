@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.coderak.mapper.WorkflowDefinitionMapper">
+
+    <select id="selectAll" resultType="top.coderak.entity.WorkflowDefinition">
+        SELECT * FROM rp_workflow_definition WHERE flag = '启用' ORDER BY create_date DESC
+    </select>
+
+    <select id="selectPublished" resultType="top.coderak.entity.WorkflowDefinition">
+        SELECT * FROM rp_workflow_definition WHERE flag = '启用' AND status = 'published' ORDER BY create_date DESC
+    </select>
+
+    <select id="selectById" resultType="top.coderak.entity.WorkflowDefinition">
+        SELECT * FROM rp_workflow_definition WHERE id = #{id}
+    </select>
+
+    <select id="selectByCode" resultType="top.coderak.entity.WorkflowDefinition">
+        SELECT * FROM rp_workflow_definition WHERE code = #{code} AND flag = '启用' LIMIT 1
+    </select>
+
+    <insert id="insert" parameterType="top.coderak.entity.WorkflowDefinition">
+        INSERT INTO rp_workflow_definition (id, code, name, description, form_code, definition_json, version, status,
+            create_by, create_date, update_by, update_date, flag)
+        VALUES (#{id}, #{code}, #{name}, #{description}, #{formCode}, #{definitionJson}, #{version}, #{status},
+            #{createBy}, #{createDate}, #{updateBy}, #{updateDate}, #{flag})
+    </insert>
+
+    <update id="updateById" parameterType="top.coderak.entity.WorkflowDefinition">
+        UPDATE rp_workflow_definition SET
+            name = #{name}, description = #{description}, form_code = #{formCode},
+            definition_json = #{definitionJson}, version = #{version}, status = #{status},
+            update_by = #{updateBy}, update_date = #{updateDate}, flag = #{flag}
+        WHERE id = #{id}
+    </update>
+</mapper>

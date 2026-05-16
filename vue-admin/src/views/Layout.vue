@@ -26,6 +26,17 @@
           <el-icon><Menu /></el-icon>
           <span>菜单管理</span>
         </el-menu-item>
+        <el-sub-menu index="form-wf">
+          <template #title>
+            <el-icon><Document /></el-icon>
+            <span>表单与工作流</span>
+          </template>
+          <el-menu-item index="/form-def">表单配置</el-menu-item>
+          <el-menu-item index="/form-fill">表单填写</el-menu-item>
+          <el-menu-item index="/workflow-def">流程配置</el-menu-item>
+          <el-menu-item index="/workflow-instance">流程实例</el-menu-item>
+          <el-menu-item index="/workflow-task">我的待办</el-menu-item>
+        </el-sub-menu>
       </el-menu>
     </el-aside>
     <el-container>
