@@ -4,6 +4,10 @@
 .classpath
 .project
 Ripple.iml
+*.log
+ripple.db
+TestDirectQuery.class
+TestDirectQuery.java
 TestDirectQuery.java
 TestDirectQuery.class
 frontend.log
