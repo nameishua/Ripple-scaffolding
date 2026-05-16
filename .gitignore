@@ -4,3 +4,7 @@
 .classpath
 .project
 Ripple.iml
+TestDirectQuery.java
+TestDirectQuery.class
+frontend.log
+backend.log
