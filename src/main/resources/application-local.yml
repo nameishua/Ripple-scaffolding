@@ -2,7 +2,7 @@ spring:
   datasource:
     url: ${RIPPLE_DATASOURCE_URL:jdbc:mysql://127.0.0.1:3306/ripple?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai}
     username: ${RIPPLE_DATASOURCE_USERNAME:root}
-    password: ${RIPPLE_DATASOURCE_PASSWORD:}
+    password: ${RIPPLE_DATASOURCE_PASSWORD:root}
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       initial-size: 2
@@ -22,25 +22,3 @@ spring:
       web-stat-filter:
         url-pattern: /*
         exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
-  redis:
-    host: ${RIPPLE_REDIS_HOST:127.0.0.1}
-    port: ${RIPPLE_REDIS_PORT:6379}
-    password: ${RIPPLE_REDIS_PASSWORD:}
-    database: ${RIPPLE_REDIS_DATABASE:0}
-  kafka:
-    bootstrap-servers: ${RIPPLE_KAFKA_BOOTSTRAP_SERVERS:127.0.0.1:9092}
-    consumer:
-      group-id: ${RIPPLE_KAFKA_CONSUMER_GROUP:ripple-local}
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      batch-size: 65536
-      buffer-memory: 524288
-
-eureka:
-  client:
-    enabled: ${RIPPLE_EUREKA_ENABLED:false}
-    register-with-eureka: false
-    fetch-registry: false

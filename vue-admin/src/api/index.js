@@ -24,7 +24,12 @@ api.interceptors.response.use(
   }
 )
 
-export const loginApi = (data) => api.post('/login/check', data)
+export const loginApi = (data) => {
+  const params = new URLSearchParams()
+  params.append('account', data.account)
+  params.append('password', data.password)
+  return api.post('/login/check', params)
+}
 
 export const getUserInfo = () => api.get('/admin/user/info')
 

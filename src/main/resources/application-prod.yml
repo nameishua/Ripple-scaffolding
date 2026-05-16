@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${RIPPLE_DATASOURCE_URL}
-    username: ${RIPPLE_DATASOURCE_USERNAME}
-    password: ${RIPPLE_DATASOURCE_PASSWORD}
+    url: ${RIPPLE_DATASOURCE_URL:jdbc:mysql://127.0.0.1:3306/ripple?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai}
+    username: ${RIPPLE_DATASOURCE_USERNAME:root}
+    password: ${RIPPLE_DATASOURCE_PASSWORD:root}
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       initial-size: ${RIPPLE_DRUID_INITIAL_SIZE:5}
@@ -13,22 +13,7 @@ spring:
       test-while-idle: true
       filters: stat,wall
       stat-view-servlet:
-        login-username: ${RIPPLE_DRUID_USERNAME}
-        login-password: ${RIPPLE_DRUID_PASSWORD}
+        login-username: ${RIPPLE_DRUID_USERNAME:admin}
+        login-password: ${RIPPLE_DRUID_PASSWORD:admin}
         reset-enable: false
         url-pattern: /druid/*
-  redis:
-    host: ${RIPPLE_REDIS_HOST}
-    port: ${RIPPLE_REDIS_PORT:6379}
-    password: ${RIPPLE_REDIS_PASSWORD:}
-    database: ${RIPPLE_REDIS_DATABASE:0}
-  kafka:
-    bootstrap-servers: ${RIPPLE_KAFKA_BOOTSTRAP_SERVERS}
-
-eureka:
-  client:
-    enabled: ${RIPPLE_EUREKA_ENABLED:false}
-    service-url:
-      defaultZone: ${RIPPLE_EUREKA_DEFAULT_ZONE:http://127.0.0.1:8881/eureka/}
-  instance:
-    prefer-ip-address: true

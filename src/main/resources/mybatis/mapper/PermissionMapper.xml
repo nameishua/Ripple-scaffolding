@@ -3,8 +3,8 @@
 <mapper namespace="top.coderak.mapper.PermissionMapper">
 
     <select id="selectPermissionsByRoleIds" resultType="top.coderak.entity.Permission">
-        SELECT DISTINCT p.* FROM permission p
-        INNER JOIN role_permission rp ON p.id = rp.permission_id
+        SELECT DISTINCT p.* FROM rp_permission p
+        INNER JOIN rp_role_permission rp ON p.id = rp.permission_id
         WHERE rp.role_id IN
         <foreach collection="roleIds" item="roleId" open="(" separator="," close=")">
             #{roleId}
@@ -13,20 +13,20 @@
     </select>
 
     <select id="selectAllPermissions" resultType="top.coderak.entity.Permission">
-        SELECT * FROM permission WHERE flag = '启用' ORDER BY create_date DESC
+        SELECT * FROM rp_permission WHERE flag = '启用' ORDER BY create_date DESC
     </select>
 
     <select id="selectById" resultType="top.coderak.entity.Permission">
-        SELECT * FROM permission WHERE id = #{id}
+        SELECT * FROM rp_permission WHERE id = #{id}
     </select>
 
     <insert id="insert" parameterType="top.coderak.entity.Permission">
-        INSERT INTO permission (id, name, code, type, description, create_by, create_date, update_by, update_date, flag)
+        INSERT INTO rp_permission (id, name, code, type, description, create_by, create_date, update_by, update_date, flag)
         VALUES (#{id}, #{name}, #{code}, #{type}, #{description}, #{createBy}, #{createDate}, #{updateBy}, #{updateDate}, #{flag})
     </insert>
 
     <update id="updateById" parameterType="top.coderak.entity.Permission">
-        UPDATE permission SET
+        UPDATE rp_permission SET
             name = #{name},
             code = #{code},
             type = #{type},

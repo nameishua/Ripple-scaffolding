@@ -3,26 +3,26 @@
 <mapper namespace="top.coderak.mapper.RoleMapper">
 
     <select id="selectRolesByUserId" resultType="top.coderak.entity.Role">
-        SELECT r.* FROM role r
-        INNER JOIN user_role ur ON r.id = ur.role_id
+        SELECT r.* FROM rp_role r
+        INNER JOIN rp_user_role ur ON r.id = ur.role_id
         WHERE ur.user_id = #{userId} AND r.flag = '启用'
     </select>
 
     <select id="selectAllRoles" resultType="top.coderak.entity.Role">
-        SELECT * FROM role WHERE flag = '启用' ORDER BY create_date DESC
+        SELECT * FROM rp_role WHERE flag = '启用' ORDER BY create_date DESC
     </select>
 
     <select id="selectById" resultType="top.coderak.entity.Role">
-        SELECT * FROM role WHERE id = #{id}
+        SELECT * FROM rp_role WHERE id = #{id}
     </select>
 
     <insert id="insert" parameterType="top.coderak.entity.Role">
-        INSERT INTO role (id, name, code, description, create_by, create_date, update_by, update_date, flag)
+        INSERT INTO rp_role (id, name, code, description, create_by, create_date, update_by, update_date, flag)
         VALUES (#{id}, #{name}, #{code}, #{description}, #{createBy}, #{createDate}, #{updateBy}, #{updateDate}, #{flag})
     </insert>
 
     <update id="updateById" parameterType="top.coderak.entity.Role">
-        UPDATE role SET
+        UPDATE rp_role SET
             name = #{name},
             code = #{code},
             description = #{description},
@@ -33,27 +33,27 @@
     </update>
 
     <insert id="insertUserRole">
-        INSERT INTO user_role (user_id, role_id) VALUES (#{userId}, #{roleId})
+        INSERT INTO rp_user_role (user_id, role_id) VALUES (#{userId}, #{roleId})
     </insert>
 
     <delete id="deleteUserRoles">
-        DELETE FROM user_role WHERE user_id = #{userId}
+        DELETE FROM rp_user_role WHERE user_id = #{userId}
     </delete>
 
     <insert id="insertRoleMenu">
-        INSERT INTO role_menu (role_id, menu_id) VALUES (#{roleId}, #{menuId})
+        INSERT INTO rp_role_menu (role_id, menu_id) VALUES (#{roleId}, #{menuId})
     </insert>
 
     <delete id="deleteRoleMenus">
-        DELETE FROM role_menu WHERE role_id = #{roleId}
+        DELETE FROM rp_role_menu WHERE role_id = #{roleId}
     </delete>
 
     <insert id="insertRolePermission">
-        INSERT INTO role_permission (role_id, permission_id) VALUES (#{roleId}, #{permissionId})
+        INSERT INTO rp_role_permission (role_id, permission_id) VALUES (#{roleId}, #{permissionId})
     </insert>
 
     <delete id="deleteRolePermissions">
-        DELETE FROM role_permission WHERE role_id = #{roleId}
+        DELETE FROM rp_role_permission WHERE role_id = #{roleId}
     </delete>
 
 </mapper>

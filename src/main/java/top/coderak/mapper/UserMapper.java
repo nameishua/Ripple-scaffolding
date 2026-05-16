@@ -19,7 +19,7 @@ public interface UserMapper {
     @Select("SELECT * FROM user where name=#{userName}")
     User findByName(@Param("userName") String userName);
 
-    @Select("SELECT * FROM user WHERE flag != '删除'")
+    @Select("SELECT * FROM user")
     List<User> findAllAnnotation();
 
     List<User> findAllXml();

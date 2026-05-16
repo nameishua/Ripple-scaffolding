@@ -9,7 +9,7 @@ import top.coderak.core.base.sqlTool.Table;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "permission")
+@Table(name = "rp_permission")
 public class Permission extends BaseBean {
 
     @Column(name = "id", type = MySqlTypeConstant.VARCHAR, length = 64, isNull = false, isKey = true, isAutoIncrement = false)

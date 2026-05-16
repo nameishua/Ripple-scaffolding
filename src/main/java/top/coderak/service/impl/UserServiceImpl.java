@@ -111,11 +111,6 @@ public class UserServiceImpl<T> extends BaseCRUDManagerImpl<User> implements Use
     @Override
     public List<User> findAllXml() throws NoSuchMethodException, SecurityException, IllegalAccessException,
             IllegalArgumentException, InvocationTargetException, InstantiationException, ClassNotFoundException {
-        Class<User> user = User.class;
-        Object newInstance = user.newInstance();
-        java.lang.reflect.Method show = user.getDeclaredMethod("show");
-        Object invoke = show.invoke(newInstance);
-        System.out.println(invoke);
         return userMapper.findAllXml();
     }
 
