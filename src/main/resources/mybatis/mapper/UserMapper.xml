@@ -21,13 +21,13 @@
     <select id="findAllXml" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM user
+        FROM rp_user
     </select>
 
     <select id="selectByAccount" parameterType="String" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM user
+        FROM rp_user
         <where>
             account = #{account,jdbcType=VARCHAR}
         </where>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.coderak.mapper.SysExtMapper">
+
+    <select id="selectAllDepts" resultType="top.coderak.entity.sys.SysDept">
+        SELECT * FROM rp_sys_dept WHERE flag = '启用' ORDER BY sort_no, create_date
+    </select>
+    <select id="selectDeptById" resultType="top.coderak.entity.sys.SysDept">
+        SELECT * FROM rp_sys_dept WHERE id = #{id}
+    </select>
+    <insert id="insertDept" parameterType="top.coderak.entity.sys.SysDept">
+        INSERT INTO rp_sys_dept (id, parent_id, name, leader, phone, sort_no, create_by, create_date, update_by, update_date, flag)
+        VALUES (#{id}, #{parentId}, #{name}, #{leader}, #{phone}, #{sortNo}, #{createBy}, #{createDate}, #{updateBy}, #{updateDate}, #{flag})
+    </insert>
+    <update id="updateDept" parameterType="top.coderak.entity.sys.SysDept">
+        UPDATE rp_sys_dept SET parent_id=#{parentId}, name=#{name}, leader=#{leader}, phone=#{phone}, sort_no=#{sortNo},
+        update_by=#{updateBy}, update_date=#{updateDate}, flag=#{flag} WHERE id=#{id}
+    </update>
+
+    <select id="selectAllDictTypes" resultType="top.coderak.entity.sys.SysDictType">
+        SELECT * FROM rp_sys_dict_type WHERE flag = '启用' ORDER BY create_date DESC
+    </select>
+    <insert id="insertDictType" parameterType="top.coderak.entity.sys.SysDictType">
+        INSERT INTO rp_sys_dict_type (id, name, code, status, remark, create_by, create_date, update_by, update_date, flag)
+        VALUES (#{id}, #{name}, #{code}, #{status}, #{remark}, #{createBy}, #{createDate}, #{updateBy}, #{updateDate}, #{flag})
+    </insert>
+    <update id="updateDictType" parameterType="top.coderak.entity.sys.SysDictType">
+        UPDATE rp_sys_dict_type SET name=#{name}, code=#{code}, status=#{status}, remark=#{remark},
+        update_by=#{updateBy}, update_date=#{updateDate}, flag=#{flag} WHERE id=#{id}
+    </update>
+
+    <select id="selectAllDictData" resultType="top.coderak.entity.sys.SysDictData">
+        SELECT * FROM rp_sys_dict_data WHERE flag = '启用' ORDER BY dict_code, sort_no
+    </select>
+    <select id="selectDictDataByCode" resultType="top.coderak.entity.sys.SysDictData">
+        SELECT * FROM rp_sys_dict_data WHERE dict_code = #{dictCode} AND flag = '启用' ORDER BY sort_no
+    </select>
+    <insert id="insertDictData" parameterType="top.coderak.entity.sys.SysDictData">
+        INSERT INTO rp_sys_dict_data (id, dict_code, label, value, sort_no, status, create_by, create_date, update_by, update_date, flag)
+        VALUES (#{id}, #{dictCode}, #{label}, #{value}, #{sortNo}, #{status}, #{createBy}, #{createDate}, #{updateBy}, #{updateDate}, #{flag})
+    </insert>
+    <update id="updateDictData" parameterType="top.coderak.entity.sys.SysDictData">
+        UPDATE rp_sys_dict_data SET dict_code=#{dictCode}, label=#{label}, value=#{value}, sort_no=#{sortNo}, status=#{status},
+        update_by=#{updateBy}, update_date=#{updateDate}, flag=#{flag} WHERE id=#{id}
+    </update>
+
+    <select id="selectAllOperLogs" resultType="top.coderak.entity.sys.SysOperLog">
+        SELECT * FROM rp_sys_oper_log WHERE flag = '启用' ORDER BY oper_time DESC
+    </select>
+    <insert id="insertOperLog" parameterType="top.coderak.entity.sys.SysOperLog">
+        INSERT INTO rp_sys_oper_log (id, module, action, method, request_url, operator, oper_ip, status, detail, oper_time,
+            create_by, create_date, update_by, update_date, flag)
+        VALUES (#{id}, #{module}, #{action}, #{method}, #{requestUrl}, #{operator}, #{operIp}, #{status}, #{detail}, #{operTime},
+            #{createBy}, #{createDate}, #{updateBy}, #{updateDate}, #{flag})
+    </insert>
+    <delete id="deleteOperLog">DELETE FROM rp_sys_oper_log WHERE id = #{id}</delete>
+
+    <select id="selectAllLoginLogs" resultType="top.coderak.entity.sys.SysLoginLog">
+        SELECT * FROM rp_sys_login_log WHERE flag = '启用' ORDER BY login_time DESC
+    </select>
+    <insert id="insertLoginLog" parameterType="top.coderak.entity.sys.SysLoginLog">
+        INSERT INTO rp_sys_login_log (id, account, login_ip, location, browser, status, message, login_time,
+            create_by, create_date, update_by, update_date, flag)
+        VALUES (#{id}, #{account}, #{loginIp}, #{location}, #{browser}, #{status}, #{message}, #{loginTime},
+            #{createBy}, #{createDate}, #{updateBy}, #{updateDate}, #{flag})
+    </insert>
+    <delete id="deleteLoginLog">DELETE FROM rp_sys_login_log WHERE id = #{id}</delete>
+
+    <select id="selectAllConfigs" resultType="top.coderak.entity.sys.SysConfig">
+        SELECT * FROM rp_sys_config WHERE flag = '启用' ORDER BY config_key
+    </select>
+    <insert id="insertConfig" parameterType="top.coderak.entity.sys.SysConfig">
+        INSERT INTO rp_sys_config (id, config_key, config_value, name, remark, create_by, create_date, update_by, update_date, flag)
+        VALUES (#{id}, #{configKey}, #{configValue}, #{name}, #{remark}, #{createBy}, #{createDate}, #{updateBy}, #{updateDate}, #{flag})
+    </insert>
+    <update id="updateConfig" parameterType="top.coderak.entity.sys.SysConfig">
+        UPDATE rp_sys_config SET config_key=#{configKey}, config_value=#{configValue}, name=#{name}, remark=#{remark},
+        update_by=#{updateBy}, update_date=#{updateDate}, flag=#{flag} WHERE id=#{id}
+    </update>
+
+    <select id="selectAllNotices" resultType="top.coderak.entity.sys.SysNotice">
+        SELECT * FROM rp_sys_notice WHERE flag = '启用' ORDER BY publish_time DESC
+    </select>
+    <insert id="insertNotice" parameterType="top.coderak.entity.sys.SysNotice">
+        INSERT INTO rp_sys_notice (id, title, content, notice_type, status, publish_time, create_by, create_date, update_by, update_date, flag)
+        VALUES (#{id}, #{title}, #{content}, #{noticeType}, #{status}, #{publishTime}, #{createBy}, #{createDate}, #{updateBy}, #{updateDate}, #{flag})
+    </insert>
+    <update id="updateNotice" parameterType="top.coderak.entity.sys.SysNotice">
+        UPDATE rp_sys_notice SET title=#{title}, content=#{content}, notice_type=#{noticeType}, status=#{status}, publish_time=#{publishTime},
+        update_by=#{updateBy}, update_date=#{updateDate}, flag=#{flag} WHERE id=#{id}
+    </update>
+
+    <select id="selectAllFiles" resultType="top.coderak.entity.sys.SysFile">
+        SELECT * FROM rp_sys_file WHERE flag = '启用' ORDER BY create_date DESC
+    </select>
+    <insert id="insertFile" parameterType="top.coderak.entity.sys.SysFile">
+        INSERT INTO rp_sys_file (id, file_name, original_name, file_path, file_size, mime_type, create_by, create_date, update_by, update_date, flag)
+        VALUES (#{id}, #{fileName}, #{originalName}, #{filePath}, #{fileSize}, #{mimeType}, #{createBy}, #{createDate}, #{updateBy}, #{updateDate}, #{flag})
+    </insert>
+    <update id="updateFile" parameterType="top.coderak.entity.sys.SysFile">
+        UPDATE rp_sys_file SET file_name=#{fileName}, original_name=#{originalName}, file_path=#{filePath}, file_size=#{fileSize}, mime_type=#{mimeType},
+        update_by=#{updateBy}, update_date=#{updateDate}, flag=#{flag} WHERE id=#{id}
+    </update>
+
+    <select id="selectAllJobs" resultType="top.coderak.entity.sys.SysJob">
+        SELECT * FROM rp_sys_job WHERE flag = '启用' ORDER BY create_date DESC
+    </select>
+    <insert id="insertJob" parameterType="top.coderak.entity.sys.SysJob">
+        INSERT INTO rp_sys_job (id, job_name, job_group, cron_expression, bean_name, status, remark, create_by, create_date, update_by, update_date, flag)
+        VALUES (#{id}, #{jobName}, #{jobGroup}, #{cronExpression}, #{beanName}, #{status}, #{remark}, #{createBy}, #{createDate}, #{updateBy}, #{updateDate}, #{flag})
+    </insert>
+    <update id="updateJob" parameterType="top.coderak.entity.sys.SysJob">
+        UPDATE rp_sys_job SET job_name=#{jobName}, job_group=#{jobGroup}, cron_expression=#{cronExpression}, bean_name=#{beanName}, status=#{status}, remark=#{remark},
+        update_by=#{updateBy}, update_date=#{updateDate}, flag=#{flag} WHERE id=#{id}
+    </update>
+
+    <select id="selectAllOrders" resultType="top.coderak.entity.sys.BizOrder">
+        SELECT * FROM rp_biz_order WHERE flag = '启用' ORDER BY create_date DESC
+    </select>
+    <insert id="insertOrder" parameterType="top.coderak.entity.sys.BizOrder">
+        INSERT INTO rp_biz_order (id, order_no, customer_name, product_name, amount, status, create_by, create_date, update_by, update_date, flag)
+        VALUES (#{id}, #{orderNo}, #{customerName}, #{productName}, #{amount}, #{status}, #{createBy}, #{createDate}, #{updateBy}, #{updateDate}, #{flag})
+    </insert>
+    <update id="updateOrder" parameterType="top.coderak.entity.sys.BizOrder">
+        UPDATE rp_biz_order SET order_no=#{orderNo}, customer_name=#{customerName}, product_name=#{productName}, amount=#{amount}, status=#{status},
+        update_by=#{updateBy}, update_date=#{updateDate}, flag=#{flag} WHERE id=#{id}
+    </update>
+
+    <select id="selectAllProducts" resultType="top.coderak.entity.sys.BizProduct">
+        SELECT * FROM rp_biz_product WHERE flag = '启用' ORDER BY create_date DESC
+    </select>
+    <insert id="insertProduct" parameterType="top.coderak.entity.sys.BizProduct">
+        INSERT INTO rp_biz_product (id, sku, name, price, stock, status, create_by, create_date, update_by, update_date, flag)
+        VALUES (#{id}, #{sku}, #{name}, #{price}, #{stock}, #{status}, #{createBy}, #{createDate}, #{updateBy}, #{updateDate}, #{flag})
+    </insert>
+    <update id="updateProduct" parameterType="top.coderak.entity.sys.BizProduct">
+        UPDATE rp_biz_product SET sku=#{sku}, name=#{name}, price=#{price}, stock=#{stock}, status=#{status},
+        update_by=#{updateBy}, update_date=#{updateDate}, flag=#{flag} WHERE id=#{id}
+    </update>
+
+    <select id="selectAllCustomers" resultType="top.coderak.entity.sys.BizCustomer">
+        SELECT * FROM rp_biz_customer WHERE flag = '启用' ORDER BY create_date DESC
+    </select>
+    <insert id="insertCustomer" parameterType="top.coderak.entity.sys.BizCustomer">
+        INSERT INTO rp_biz_customer (id, name, phone, email, level, create_by, create_date, update_by, update_date, flag)
+        VALUES (#{id}, #{name}, #{phone}, #{email}, #{level}, #{createBy}, #{createDate}, #{updateBy}, #{updateDate}, #{flag})
+    </insert>
+    <update id="updateCustomer" parameterType="top.coderak.entity.sys.BizCustomer">
+        UPDATE rp_biz_customer SET name=#{name}, phone=#{phone}, email=#{email}, level=#{level},
+        update_by=#{updateBy}, update_date=#{updateDate}, flag=#{flag} WHERE id=#{id}
+    </update>
+
+    <select id="selectDashboardCounts" resultType="map">
+        SELECT
+        (SELECT COUNT(*) FROM rp_user WHERE flag = '启用') AS userCount,
+        (SELECT COUNT(*) FROM rp_role WHERE flag = '启用') AS roleCount,
+        (SELECT COUNT(*) FROM rp_menu WHERE flag = '启用') AS menuCount,
+        (SELECT COUNT(*) FROM rp_permission WHERE flag = '启用') AS permissionCount,
+        (SELECT COUNT(*) FROM rp_sys_dept WHERE flag = '启用') AS deptCount,
+        (SELECT COUNT(*) FROM rp_biz_order WHERE flag = '启用') AS orderCount,
+        (SELECT COUNT(*) FROM rp_biz_product WHERE flag = '启用') AS productCount,
+        (SELECT COUNT(*) FROM rp_biz_customer WHERE flag = '启用') AS customerCount,
+        (SELECT COUNT(*) FROM rp_form_definition WHERE flag = '启用') AS formDefCount,
+        (SELECT COUNT(*) FROM rp_workflow_definition WHERE flag = '启用') AS workflowDefCount,
+        (SELECT COUNT(*) FROM rp_workflow_task WHERE status = 'pending') AS todoTaskCount
+    </select>
+</mapper>

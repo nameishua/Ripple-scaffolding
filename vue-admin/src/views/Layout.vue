@@ -1,6 +1,6 @@
 <template>
   <el-container class="layout-container">
-    <el-aside width="200px">
+    <el-aside width="220px">
       <div class="logo">Ripple Admin</div>
       <el-menu
         :default-active="activeMenu"
@@ -14,19 +14,44 @@
           <el-icon><HomeFilled /></el-icon>
           <span>首页</span>
         </el-menu-item>
-        <el-menu-item index="/user">
-          <el-icon><User /></el-icon>
-          <span>用户管理</span>
-        </el-menu-item>
-        <el-menu-item index="/role">
-          <el-icon><Wallet /></el-icon>
-          <span>角色管理</span>
-        </el-menu-item>
-        <el-menu-item index="/menu">
-          <el-icon><Menu /></el-icon>
-          <span>菜单管理</span>
-        </el-menu-item>
-        <el-sub-menu index="form-wf">
+
+        <el-sub-menu index="sys">
+          <template #title>
+            <el-icon><Setting /></el-icon>
+            <span>系统管理</span>
+          </template>
+          <el-menu-item index="/user">用户管理</el-menu-item>
+          <el-menu-item index="/role">角色管理</el-menu-item>
+          <el-menu-item index="/menu">菜单管理</el-menu-item>
+          <el-menu-item index="/permission">权限管理</el-menu-item>
+          <el-menu-item index="/dept">部门管理</el-menu-item>
+          <el-menu-item index="/dict">字典管理</el-menu-item>
+          <el-menu-item index="/config">参数配置</el-menu-item>
+          <el-menu-item index="/notice">通知公告</el-menu-item>
+          <el-menu-item index="/file">文件管理</el-menu-item>
+          <el-menu-item index="/job">定时任务</el-menu-item>
+        </el-sub-menu>
+
+        <el-sub-menu index="monitor">
+          <template #title>
+            <el-icon><Monitor /></el-icon>
+            <span>监控中心</span>
+          </template>
+          <el-menu-item index="/oper-log">操作日志</el-menu-item>
+          <el-menu-item index="/login-log">登录日志</el-menu-item>
+        </el-sub-menu>
+
+        <el-sub-menu index="biz">
+          <template #title>
+            <el-icon><Shop /></el-icon>
+            <span>业务管理</span>
+          </template>
+          <el-menu-item index="/order">订单管理</el-menu-item>
+          <el-menu-item index="/product">商品管理</el-menu-item>
+          <el-menu-item index="/customer">客户管理</el-menu-item>
+        </el-sub-menu>
+
+        <el-sub-menu index="wf">
           <template #title>
             <el-icon><Document /></el-icon>
             <span>表单与工作流</span>
@@ -42,7 +67,7 @@
     <el-container>
       <el-header>
         <div class="header-content">
-          <span class="title">后台管理系统</span>
+          <span class="title">Ripple 企业后台管理系统</span>
           <div class="user-info">
             <span>{{ userName }}</span>
             <el-button type="danger" size="small" @click="handleLogout">退出</el-button>

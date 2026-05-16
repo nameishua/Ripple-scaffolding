@@ -10,8 +10,10 @@ param(
 $Root = Split-Path $PSScriptRoot -Parent
 $Schema = Join-Path $Root "src\main\resources\schema-mysql.sql"
 $SchemaWf = Join-Path $Root "src\main\resources\schema-workflow-form-mysql.sql"
+$SchemaExt = Join-Path $Root "src\main\resources\schema-system-ext-mysql.sql"
 $Seed = Join-Path $Root "src\main\resources\seed-data-mysql.sql"
 $SeedWf = Join-Path $Root "src\main\resources\seed-workflow-form-mysql.sql"
+$SeedExt = Join-Path $Root "src\main\resources\seed-system-ext-mysql.sql"
 
 if (-not (Test-Path $MysqlBin)) {
     Write-Host "mysql.exe not found: $MysqlBin" -ForegroundColor Red
@@ -23,16 +25,20 @@ Write-Host "Creating database [$Database]..." -ForegroundColor Cyan
 
 $SchemaPath = ($Schema -replace '\\', '/')
 $SchemaWfPath = ($SchemaWf -replace '\\', '/')
+$SchemaExtPath = ($SchemaExt -replace '\\', '/')
 $SeedPath = ($Seed -replace '\\', '/')
 $SeedWfPath = ($SeedWf -replace '\\', '/')
+$SeedExtPath = ($SeedExt -replace '\\', '/')
 
 Write-Host "Applying schema..." -ForegroundColor Cyan
 & $MysqlBin -h $DbHost -u $User "-p$Password" --default-character-set=utf8mb4 $Database -e "source $SchemaPath"
 & $MysqlBin -h $DbHost -u $User "-p$Password" --default-character-set=utf8mb4 $Database -e "source $SchemaWfPath"
+& $MysqlBin -h $DbHost -u $User "-p$Password" --default-character-set=utf8mb4 $Database -e "source $SchemaExtPath"
 
 Write-Host "Applying seed data..." -ForegroundColor Cyan
 & $MysqlBin -h $DbHost -u $User "-p$Password" --default-character-set=utf8mb4 $Database -e "source $SeedPath"
 & $MysqlBin -h $DbHost -u $User "-p$Password" --default-character-set=utf8mb4 $Database -e "source $SeedWfPath"
+& $MysqlBin -h $DbHost -u $User "-p$Password" --default-character-set=utf8mb4 $Database -e "source $SeedExtPath"
 
 Write-Host "Done." -ForegroundColor Green
 & $MysqlBin -h $DbHost -u $User "-p$Password" --default-character-set=utf8mb4 $Database -e "SELECT COUNT(*) AS roles FROM rp_role; SELECT COUNT(*) AS menus FROM rp_menu;"

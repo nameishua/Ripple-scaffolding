@@ -94,4 +94,54 @@ export const getWorkflowTasks = (instanceId) => api.get('/admin/workflow/task/li
 export const approveWorkflowTask = (taskId, comment) => api.post('/admin/workflow/task/approve', null, { params: { taskId, comment } })
 export const rejectWorkflowTask = (taskId, comment) => api.post('/admin/workflow/task/reject', null, { params: { taskId, comment } })
 
+export const getDashboardStats = () => api.get('/admin/dashboard/stats')
+
+export const getDeptList = () => api.get('/admin/dept/list')
+export const saveDept = (data) => api.post('/admin/dept/save', data)
+export const deleteDept = (id) => api.post('/admin/dept/delete', null, { params: { id } })
+
+export const getDictTypeList = () => api.get('/admin/dict/type/list')
+export const saveDictType = (data) => api.post('/admin/dict/type/save', data)
+export const deleteDictType = (id) => api.post('/admin/dict/type/delete', null, { params: { id } })
+export const getDictDataList = () => api.get('/admin/dict/data/list')
+export const saveDictData = (data) => api.post('/admin/dict/data/save', data)
+export const deleteDictData = (id) => api.post('/admin/dict/data/delete', null, { params: { id } })
+
+export const getOperLogList = () => api.get('/admin/log/oper/list')
+export const deleteOperLog = (id) => api.post('/admin/log/oper/delete', null, { params: { id } })
+export const getLoginLogList = () => api.get('/admin/log/login/list')
+export const deleteLoginLog = (id) => api.post('/admin/log/login/delete', null, { params: { id } })
+
+export const getConfigList = () => api.get('/admin/config/list')
+export const saveConfig = (data) => api.post('/admin/config/save', data)
+export const deleteConfig = (id) => api.post('/admin/config/delete', null, { params: { id } })
+
+export const getNoticeList = () => api.get('/admin/notice/list')
+export const saveNotice = (data) => api.post('/admin/notice/save', data)
+export const deleteNotice = (id) => api.post('/admin/notice/delete', null, { params: { id } })
+
+export const getFileList = () => api.get('/admin/file/list')
+export const saveFile = (data) => api.post('/admin/file/save', data)
+export const deleteFile = (id) => api.post('/admin/file/delete', null, { params: { id } })
+
+export const getJobList = () => api.get('/admin/job/list')
+export const saveJob = (data) => api.post('/admin/job/save', data)
+export const deleteJob = (id) => api.post('/admin/job/delete', null, { params: { id } })
+
+export const getOrderList = () => api.get('/admin/biz/order/list')
+export const saveOrder = (data) => api.post('/admin/biz/order/save', data)
+export const deleteOrder = (id) => api.post('/admin/biz/order/delete', null, { params: { id } })
+
+export const getProductList = () => api.get('/admin/biz/product/list')
+export const saveProduct = (data) => api.post('/admin/biz/product/save', data)
+export const deleteProduct = (id) => api.post('/admin/biz/product/delete', null, { params: { id } })
+
+export const getCustomerList = () => api.get('/admin/biz/customer/list')
+export const saveCustomer = (data) => api.post('/admin/biz/customer/save', data)
+export const deleteCustomer = (id) => api.post('/admin/biz/customer/delete', null, { params: { id } })
+
+export const getPermissionList = () => api.get('/admin/permission/list')
+export const savePermission = (data) => (data.id ? api.post('/admin/permission/update', data) : api.post('/admin/permission/add', data))
+export const deletePermission = (id) => api.post('/admin/permission/delete', null, { params: { id } })
+
 export default api
