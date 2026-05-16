@@ -18,7 +18,7 @@
         </el-table-column>
         <el-table-column label="操作" width="260" fixed="right">
           <template #default="{ row }">
-            <el-button size="small" @click="handleEdit(row)">编辑</el-button>
+            <el-button size="small" @click="handleEdit(row)">设计</el-button>
             <el-button size="small" type="success" v-if="row.status !== 'published'" @click="handlePublish(row)">发布</el-button>
             <el-button size="small" type="danger" @click="handleDelete(row)">删除</el-button>
           </template>
@@ -26,16 +26,48 @@
       </el-table>
     </el-card>
 
-    <el-dialog v-model="dialogVisible" :title="dialogTitle" width="760px">
-      <el-form :model="form" label-width="90px">
-        <el-form-item label="编码"><el-input v-model="form.code" :disabled="!!form.id" /></el-form-item>
-        <el-form-item label="名称"><el-input v-model="form.name" /></el-form-item>
-        <el-form-item label="关联表单"><el-input v-model="form.formCode" placeholder="如 LEAVE_FORM" /></el-form-item>
-        <el-form-item label="描述"><el-input v-model="form.description" type="textarea" /></el-form-item>
-        <el-form-item label="流程JSON">
-          <el-input v-model="form.definitionJson" type="textarea" :rows="14" />
-        </el-form-item>
+    <el-dialog
+      v-model="dialogVisible"
+      :title="dialogTitle"
+      width="1100px"
+      top="4vh"
+      destroy-on-close
+      class="workflow-designer-dialog"
+    >
+      <el-form :model="form" label-width="90px" class="meta-form">
+        <el-row :gutter="16">
+          <el-col :span="6">
+            <el-form-item label="编码">
+              <el-input v-model="form.code" :disabled="!!form.id" placeholder="如 LEAVE_APPROVAL" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="名称">
+              <el-input v-model="form.name" placeholder="流程名称" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="关联表单">
+              <el-select v-model="form.formCode" filterable clearable placeholder="选择已发布表单" style="width: 100%">
+                <el-option
+                  v-for="f in publishedForms"
+                  :key="f.code"
+                  :label="`${f.name} (${f.code})`"
+                  :value="f.code"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="描述">
+              <el-input v-model="form.description" placeholder="可选" />
+            </el-form-item>
+          </el-col>
+        </el-row>
       </el-form>
+
+      <WorkflowDesigner ref="designerRef" v-model="form.definitionJson" />
+
       <template #footer>
         <el-button @click="dialogVisible = false">取消</el-button>
         <el-button type="primary" @click="handleSubmit">保存</el-button>
@@ -47,30 +79,32 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import WorkflowDesigner from '../components/WorkflowDesigner.vue'
+import { defaultDefinitionJson } from '../utils/workflowSchema.js'
 import {
-  getWorkflowDefinitionList, addWorkflowDefinition, updateWorkflowDefinition,
-  deleteWorkflowDefinition, publishWorkflowDefinition
+  getWorkflowDefinitionList,
+  addWorkflowDefinition,
+  updateWorkflowDefinition,
+  deleteWorkflowDefinition,
+  publishWorkflowDefinition,
+  getPublishedFormDefinitions
 } from '../api'
 
 const tableData = ref([])
+const publishedForms = ref([])
 const dialogVisible = ref(false)
 const dialogTitle = ref('新建工作流')
-const defaultDef = JSON.stringify({
-  nodes: [
-    { key: 'start', name: '开始', type: 'start' },
-    { key: 'mgr', name: '经理审批', type: 'approval', assignee: 'admin' },
-    { key: 'end', name: '结束', type: 'end' }
-  ],
-  edges: [
-    { from: 'start', to: 'mgr' },
-    { from: 'mgr', to: 'end', on: 'approve' },
-    { from: 'mgr', to: 'end', on: 'reject' }
-  ]
-}, null, 2)
+const designerRef = ref()
 
 const form = reactive({
-  id: '', code: '', name: '', description: '', formCode: 'LEAVE_FORM',
-  definitionJson: defaultDef, version: 1, status: 'draft'
+  id: '',
+  code: '',
+  name: '',
+  description: '',
+  formCode: 'LEAVE_FORM',
+  definitionJson: defaultDefinitionJson(),
+  version: 1,
+  status: 'draft'
 })
 
 const loadData = async () => {
@@ -78,31 +112,53 @@ const loadData = async () => {
   if (res.success) tableData.value = res.data || []
 }
 
+const loadPublishedForms = async () => {
+  const res = await getPublishedFormDefinitions()
+  if (res.success) publishedForms.value = res.data || []
+}
+
 const handleAdd = () => {
   dialogTitle.value = '新建工作流'
-  Object.assign(form, { id: '', code: '', name: '', description: '', formCode: 'LEAVE_FORM', definitionJson: defaultDef, version: 1, status: 'draft' })
+  Object.assign(form, {
+    id: '',
+    code: '',
+    name: '',
+    description: '',
+    formCode: publishedForms.value[0]?.code || 'LEAVE_FORM',
+    definitionJson: defaultDefinitionJson(),
+    version: 1,
+    status: 'draft'
+  })
   dialogVisible.value = true
 }
 
 const handleEdit = (row) => {
-  dialogTitle.value = '编辑工作流'
+  dialogTitle.value = `设计工作流 · ${row.name}`
   Object.assign(form, row)
-  try {
-    form.definitionJson = JSON.stringify(JSON.parse(row.definitionJson), null, 2)
-  } catch {
-    form.definitionJson = row.definitionJson
-  }
+  form.definitionJson = row.definitionJson || defaultDefinitionJson()
   dialogVisible.value = true
 }
 
 const handleSubmit = async () => {
+  if (!form.code?.trim() || !form.name?.trim()) {
+    ElMessage.warning('请填写工作流编码和名称')
+    return
+  }
+  const check = designerRef.value?.validate?.()
+  if (check && !check.ok) {
+    ElMessage.error(check.message)
+    return
+  }
   try {
     JSON.parse(form.definitionJson)
   } catch {
-    ElMessage.error('definitionJson 不是合法 JSON')
+    ElMessage.error('流程配置不是合法 JSON')
     return
   }
-  const payload = { ...form, definitionJson: JSON.stringify(JSON.parse(form.definitionJson)) }
+  const payload = {
+    ...form,
+    definitionJson: JSON.stringify(JSON.parse(form.definitionJson))
+  }
   const res = form.id ? await updateWorkflowDefinition(payload) : await addWorkflowDefinition(payload)
   if (res.success) {
     ElMessage.success('保存成功')
@@ -130,9 +186,26 @@ const handleDelete = async (row) => {
   }
 }
 
-onMounted(loadData)
+onMounted(async () => {
+  await loadPublishedForms()
+  loadData()
+})
 </script>
 
 <style scoped>
-.card-header { display: flex; justify-content: space-between; align-items: center; }
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.meta-form {
+  margin-bottom: 8px;
+}
+
+:deep(.workflow-designer-dialog .el-dialog__body) {
+  padding-top: 12px;
+  max-height: calc(92vh - 120px);
+  overflow-y: auto;
+}
 </style>
