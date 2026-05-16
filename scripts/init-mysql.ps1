@@ -19,11 +19,14 @@ if (-not (Test-Path $MysqlBin)) {
 Write-Host "Creating database [$Database]..." -ForegroundColor Cyan
 & $MysqlBin -h $DbHost -u $User "-p$Password" -e "CREATE DATABASE IF NOT EXISTS $Database DEFAULT CHARSET utf8mb4;"
 
+$SchemaPath = ($Schema -replace '\\', '/')
+$SeedPath = ($Seed -replace '\\', '/')
+
 Write-Host "Applying schema..." -ForegroundColor Cyan
-Get-Content $Schema -Encoding UTF8 -Raw | & $MysqlBin -h $DbHost -u $User "-p$Password" --default-character-set=utf8mb4 $Database
+& $MysqlBin -h $DbHost -u $User "-p$Password" --default-character-set=utf8mb4 $Database -e "source $SchemaPath"
 
 Write-Host "Applying seed data..." -ForegroundColor Cyan
-Get-Content $Seed -Encoding UTF8 -Raw | & $MysqlBin -h $DbHost -u $User "-p$Password" --default-character-set=utf8mb4 $Database
+& $MysqlBin -h $DbHost -u $User "-p$Password" --default-character-set=utf8mb4 $Database -e "source $SeedPath"
 
 Write-Host "Done." -ForegroundColor Green
 & $MysqlBin -h $DbHost -u $User "-p$Password" --default-character-set=utf8mb4 $Database -e "SELECT COUNT(*) AS roles FROM rp_role; SELECT COUNT(*) AS menus FROM rp_menu;"
