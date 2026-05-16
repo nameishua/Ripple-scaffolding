@@ -1,4 +1,4 @@
-package top.coderak.web;
+package top.coderak.modules.system.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringBootVersion;

@@ -10,15 +10,11 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class CustomRealm extends AuthorizingRealm {
-
-    @Autowired
-    ShiroConfig shiroConfig;
 
     @Autowired
     private UserMapper userMapper;
@@ -42,9 +38,6 @@ public class CustomRealm extends AuthorizingRealm {
         return info;
     }
 
-    /**
-     * 获取即将需要认证的信息
-     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken)
             throws AuthenticationException {
@@ -55,7 +48,6 @@ public class CustomRealm extends AuthorizingRealm {
 
         String userPwd = new String((char[]) authenticationToken.getCredentials());
 
-        // 根据用户名从数据库获取密码
         User user = new User();
 
         if (account == null) {
@@ -67,6 +59,10 @@ public class CustomRealm extends AuthorizingRealm {
 
             System.out.println(user);
 
+            if (user == null) {
+                throw new AccountException("用户不存在");
+            }
+
             String tempString = MD5Utils.string2MD5(userPwd);
 
             String password = user.getPassword();
@@ -76,27 +72,10 @@ public class CustomRealm extends AuthorizingRealm {
             System.out.println(password);
 
             if (!tempString.equals(password)) {
-
-                System.out.println("$$$$$$$$$");
-
                 throw new AccountException("密码不正确");
             }
         }
 
         return new SimpleAuthenticationInfo(account, userPwd, getName());
     }
-
-    @Bean
-    public CustomRealm customRealm() {
-
-        CustomRealm customRealm = new CustomRealm();
-
-        // 告诉realm,使用credentialsMatcher加密算法类来验证密文
-        customRealm.setCredentialsMatcher(shiroConfig.hashedCredentialsMatcher());
-
-        customRealm.setCachingEnabled(false);
-
-        return customRealm;
-    }
-
 }

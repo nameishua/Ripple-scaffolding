@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:ripple;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema-h2.sql
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+      - org.springframework.kafka.annotation.KafkaAnnotationDrivenAutoConfiguration
+      - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+  kafka:
+    listener:
+      missing-topic-fatal: false
+
+eureka:
+  client:
+    enabled: ${RIPPLE_EUREKA_ENABLED:false}
+    register-with-eureka: false
+    fetch-registry: false

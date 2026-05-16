@@ -17,7 +17,7 @@ public class MybatisPageHelper {
 
         Properties props = new Properties();
 
-        props.setProperty("dialect", "mysql");
+        props.setProperty("helperDialect", "mysql");
 
         // 表示支持从接口中读取pageNum和pageSize
         props.setProperty("supportMethodsArguments", "true");

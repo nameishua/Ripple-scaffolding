@@ -1,0 +1,719 @@
+WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+2026-05-17 00:01:52,052 main ERROR FileManager (E:/ripple-logs/test.log) java.io.IOException: Could not create directory E:\ripple-logs java.io.IOException: Could not create directory E:\ripple-logs
+	at org.apache.logging.log4j.core.util.FileUtils.mkdir(FileUtils.java:120)
+	at org.apache.logging.log4j.core.util.FileUtils.makeParentDirs(FileUtils.java:137)
+	at org.apache.logging.log4j.core.appender.FileManager$FileManagerFactory.createManager(FileManager.java:434)
+	at org.apache.logging.log4j.core.appender.FileManager$FileManagerFactory.createManager(FileManager.java:422)
+	at org.apache.logging.log4j.core.appender.AbstractManager.getManager(AbstractManager.java:144)
+	at org.apache.logging.log4j.core.appender.OutputStreamManager.getManager(OutputStreamManager.java:100)
+	at org.apache.logging.log4j.core.appender.FileManager.getFileManager(FileManager.java:182)
+	at org.apache.logging.log4j.core.appender.FileAppender$Builder.build(FileAppender.java:96)
+	at org.apache.logging.log4j.core.appender.FileAppender$Builder.build(FileAppender.java:52)
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.build(PluginBuilder.java:124)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createPluginObject(AbstractConfiguration.java:1122)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1047)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1039)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.doConfigure(AbstractConfiguration.java:651)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.initialize(AbstractConfiguration.java:249)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.start(AbstractConfiguration.java:295)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:621)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:285)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:175)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:166)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithSpecificConfig(AbstractLoggingSystem.java:67)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initialize(AbstractLoggingSystem.java:57)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.initialize(Log4J2LoggingSystem.java:147)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:295)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:263)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:226)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEvent(LoggingApplicationListener.java:199)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:127)
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:54)
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:347)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at top.coderak.RippleApp.main(RippleApp.java:17)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:50)
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:51)
+
+2026-05-17 00:01:52,058 main ERROR Could not create plugin of type class org.apache.logging.log4j.core.appender.FileAppender for element File: java.lang.IllegalStateException: ManagerFactory [org.apache.logging.log4j.core.appender.FileManager$FileManagerFactory@3bcd05cb] unable to create manager for [E:/ripple-logs/test.log] with data [org.apache.logging.log4j.core.appender.FileManager$FactoryData@3b6d844d] java.lang.IllegalStateException: ManagerFactory [org.apache.logging.log4j.core.appender.FileManager$FileManagerFactory@3bcd05cb] unable to create manager for [E:/ripple-logs/test.log] with data [org.apache.logging.log4j.core.appender.FileManager$FactoryData@3b6d844d]
+	at org.apache.logging.log4j.core.appender.AbstractManager.getManager(AbstractManager.java:146)
+	at org.apache.logging.log4j.core.appender.OutputStreamManager.getManager(OutputStreamManager.java:100)
+	at org.apache.logging.log4j.core.appender.FileManager.getFileManager(FileManager.java:182)
+	at org.apache.logging.log4j.core.appender.FileAppender$Builder.build(FileAppender.java:96)
+	at org.apache.logging.log4j.core.appender.FileAppender$Builder.build(FileAppender.java:52)
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.build(PluginBuilder.java:124)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createPluginObject(AbstractConfiguration.java:1122)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1047)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1039)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.doConfigure(AbstractConfiguration.java:651)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.initialize(AbstractConfiguration.java:249)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.start(AbstractConfiguration.java:295)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:621)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:285)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:175)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:166)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithSpecificConfig(AbstractLoggingSystem.java:67)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initialize(AbstractLoggingSystem.java:57)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.initialize(Log4J2LoggingSystem.java:147)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:295)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:263)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:226)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEvent(LoggingApplicationListener.java:199)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:127)
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:54)
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:347)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at top.coderak.RippleApp.main(RippleApp.java:17)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:50)
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:51)
+
+2026-05-17 00:01:52,059 main ERROR Unable to invoke factory method in class org.apache.logging.log4j.core.appender.FileAppender for element File: java.lang.IllegalStateException: No factory method found for class org.apache.logging.log4j.core.appender.FileAppender java.lang.IllegalStateException: No factory method found for class org.apache.logging.log4j.core.appender.FileAppender
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.findFactoryMethod(PluginBuilder.java:238)
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.build(PluginBuilder.java:136)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createPluginObject(AbstractConfiguration.java:1122)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1047)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1039)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.doConfigure(AbstractConfiguration.java:651)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.initialize(AbstractConfiguration.java:249)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.start(AbstractConfiguration.java:295)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:621)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:285)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:175)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:166)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithSpecificConfig(AbstractLoggingSystem.java:67)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initialize(AbstractLoggingSystem.java:57)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.initialize(Log4J2LoggingSystem.java:147)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:295)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:263)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:226)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEvent(LoggingApplicationListener.java:199)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:127)
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:54)
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:347)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at top.coderak.RippleApp.main(RippleApp.java:17)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:50)
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:51)
+
+2026-05-17 00:01:52,073 main ERROR Unable to create file E:/ripple-logs/info.log java.io.IOException: Could not create directory E:\ripple-logs
+	at org.apache.logging.log4j.core.util.FileUtils.mkdir(FileUtils.java:120)
+	at org.apache.logging.log4j.core.util.FileUtils.makeParentDirs(FileUtils.java:137)
+	at org.apache.logging.log4j.core.appender.rolling.RollingFileManager$RollingFileManagerFactory.createManager(RollingFileManager.java:732)
+	at org.apache.logging.log4j.core.appender.rolling.RollingFileManager$RollingFileManagerFactory.createManager(RollingFileManager.java:716)
+	at org.apache.logging.log4j.core.appender.AbstractManager.getManager(AbstractManager.java:144)
+	at org.apache.logging.log4j.core.appender.OutputStreamManager.getManager(OutputStreamManager.java:100)
+	at org.apache.logging.log4j.core.appender.rolling.RollingFileManager.getFileManager(RollingFileManager.java:217)
+	at org.apache.logging.log4j.core.appender.RollingFileAppender$Builder.build(RollingFileAppender.java:146)
+	at org.apache.logging.log4j.core.appender.RollingFileAppender$Builder.build(RollingFileAppender.java:62)
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.build(PluginBuilder.java:124)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createPluginObject(AbstractConfiguration.java:1122)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1047)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1039)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.doConfigure(AbstractConfiguration.java:651)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.initialize(AbstractConfiguration.java:249)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.start(AbstractConfiguration.java:295)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:621)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:285)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:175)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:166)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithSpecificConfig(AbstractLoggingSystem.java:67)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initialize(AbstractLoggingSystem.java:57)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.initialize(Log4J2LoggingSystem.java:147)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:295)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:263)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:226)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEvent(LoggingApplicationListener.java:199)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:127)
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:54)
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:347)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at top.coderak.RippleApp.main(RippleApp.java:17)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:50)
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:51)
+
+2026-05-17 00:01:52,074 main ERROR Could not create plugin of type class org.apache.logging.log4j.core.appender.RollingFileAppender for element RollingFile: java.lang.IllegalStateException: ManagerFactory [org.apache.logging.log4j.core.appender.rolling.RollingFileManager$RollingFileManagerFactory@32115b28] unable to create manager for [E:/ripple-logs/info.log] with data [org.apache.logging.log4j.core.appender.rolling.RollingFileManager$FactoryData@2ad48653[pattern=E:/ripple-logs/ripple-logs-INFO-%d{yyyy-MM-dd}_%i.log.gz, append=true, bufferedIO=true, bufferSize=8192, policy=CompositeTriggeringPolicy(policies=[TimeBasedTriggeringPolicy(nextRolloverMillis=0, interval=1, modulate=false), SizeBasedTriggeringPolicy(size=10485760)]), strategy=DefaultRolloverStrategy(min=1, max=15, useMax=true), advertiseURI=null, layout=%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n, filePermissions=null, fileOwner=null]] java.lang.IllegalStateException: ManagerFactory [org.apache.logging.log4j.core.appender.rolling.RollingFileManager$RollingFileManagerFactory@32115b28] unable to create manager for [E:/ripple-logs/info.log] with data [org.apache.logging.log4j.core.appender.rolling.RollingFileManager$FactoryData@2ad48653[pattern=E:/ripple-logs/ripple-logs-INFO-%d{yyyy-MM-dd}_%i.log.gz, append=true, bufferedIO=true, bufferSize=8192, policy=CompositeTriggeringPolicy(policies=[TimeBasedTriggeringPolicy(nextRolloverMillis=0, interval=1, modulate=false), SizeBasedTriggeringPolicy(size=10485760)]), strategy=DefaultRolloverStrategy(min=1, max=15, useMax=true), advertiseURI=null, layout=%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n, filePermissions=null, fileOwner=null]]
+	at org.apache.logging.log4j.core.appender.AbstractManager.getManager(AbstractManager.java:146)
+	at org.apache.logging.log4j.core.appender.OutputStreamManager.getManager(OutputStreamManager.java:100)
+	at org.apache.logging.log4j.core.appender.rolling.RollingFileManager.getFileManager(RollingFileManager.java:217)
+	at org.apache.logging.log4j.core.appender.RollingFileAppender$Builder.build(RollingFileAppender.java:146)
+	at org.apache.logging.log4j.core.appender.RollingFileAppender$Builder.build(RollingFileAppender.java:62)
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.build(PluginBuilder.java:124)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createPluginObject(AbstractConfiguration.java:1122)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1047)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1039)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.doConfigure(AbstractConfiguration.java:651)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.initialize(AbstractConfiguration.java:249)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.start(AbstractConfiguration.java:295)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:621)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:285)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:175)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:166)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithSpecificConfig(AbstractLoggingSystem.java:67)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initialize(AbstractLoggingSystem.java:57)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.initialize(Log4J2LoggingSystem.java:147)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:295)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:263)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:226)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEvent(LoggingApplicationListener.java:199)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:127)
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:54)
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:347)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at top.coderak.RippleApp.main(RippleApp.java:17)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:50)
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:51)
+
+2026-05-17 00:01:52,077 main ERROR Unable to invoke factory method in class org.apache.logging.log4j.core.appender.RollingFileAppender for element RollingFile: java.lang.IllegalStateException: No factory method found for class org.apache.logging.log4j.core.appender.RollingFileAppender java.lang.IllegalStateException: No factory method found for class org.apache.logging.log4j.core.appender.RollingFileAppender
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.findFactoryMethod(PluginBuilder.java:238)
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.build(PluginBuilder.java:136)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createPluginObject(AbstractConfiguration.java:1122)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1047)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1039)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.doConfigure(AbstractConfiguration.java:651)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.initialize(AbstractConfiguration.java:249)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.start(AbstractConfiguration.java:295)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:621)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:285)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:175)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:166)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithSpecificConfig(AbstractLoggingSystem.java:67)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initialize(AbstractLoggingSystem.java:57)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.initialize(Log4J2LoggingSystem.java:147)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:295)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:263)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:226)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEvent(LoggingApplicationListener.java:199)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:127)
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:54)
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:347)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at top.coderak.RippleApp.main(RippleApp.java:17)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:50)
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:51)
+
+2026-05-17 00:01:52,080 main ERROR Unable to create file E:/ripple-logs/warn.log java.io.IOException: Could not create directory E:\ripple-logs
+	at org.apache.logging.log4j.core.util.FileUtils.mkdir(FileUtils.java:120)
+	at org.apache.logging.log4j.core.util.FileUtils.makeParentDirs(FileUtils.java:137)
+	at org.apache.logging.log4j.core.appender.rolling.RollingFileManager$RollingFileManagerFactory.createManager(RollingFileManager.java:732)
+	at org.apache.logging.log4j.core.appender.rolling.RollingFileManager$RollingFileManagerFactory.createManager(RollingFileManager.java:716)
+	at org.apache.logging.log4j.core.appender.AbstractManager.getManager(AbstractManager.java:144)
+	at org.apache.logging.log4j.core.appender.OutputStreamManager.getManager(OutputStreamManager.java:100)
+	at org.apache.logging.log4j.core.appender.rolling.RollingFileManager.getFileManager(RollingFileManager.java:217)
+	at org.apache.logging.log4j.core.appender.RollingFileAppender$Builder.build(RollingFileAppender.java:146)
+	at org.apache.logging.log4j.core.appender.RollingFileAppender$Builder.build(RollingFileAppender.java:62)
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.build(PluginBuilder.java:124)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createPluginObject(AbstractConfiguration.java:1122)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1047)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1039)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.doConfigure(AbstractConfiguration.java:651)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.initialize(AbstractConfiguration.java:249)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.start(AbstractConfiguration.java:295)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:621)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:285)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:175)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:166)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithSpecificConfig(AbstractLoggingSystem.java:67)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initialize(AbstractLoggingSystem.java:57)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.initialize(Log4J2LoggingSystem.java:147)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:295)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:263)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:226)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEvent(LoggingApplicationListener.java:199)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:127)
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:54)
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:347)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at top.coderak.RippleApp.main(RippleApp.java:17)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:50)
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:51)
+
+2026-05-17 00:01:52,082 main ERROR Could not create plugin of type class org.apache.logging.log4j.core.appender.RollingFileAppender for element RollingFile: java.lang.IllegalStateException: ManagerFactory [org.apache.logging.log4j.core.appender.rolling.RollingFileManager$RollingFileManagerFactory@32115b28] unable to create manager for [E:/ripple-logs/warn.log] with data [org.apache.logging.log4j.core.appender.rolling.RollingFileManager$FactoryData@61710c6[pattern=E:/ripple-logs/ripple-logs-WARN-%d{yyyy-MM-dd}_%i.log.gz, append=true, bufferedIO=true, bufferSize=8192, policy=CompositeTriggeringPolicy(policies=[TimeBasedTriggeringPolicy(nextRolloverMillis=0, interval=1, modulate=false), SizeBasedTriggeringPolicy(size=10485760)]), strategy=DefaultRolloverStrategy(min=1, max=15, useMax=true), advertiseURI=null, layout=%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n, filePermissions=null, fileOwner=null]] java.lang.IllegalStateException: ManagerFactory [org.apache.logging.log4j.core.appender.rolling.RollingFileManager$RollingFileManagerFactory@32115b28] unable to create manager for [E:/ripple-logs/warn.log] with data [org.apache.logging.log4j.core.appender.rolling.RollingFileManager$FactoryData@61710c6[pattern=E:/ripple-logs/ripple-logs-WARN-%d{yyyy-MM-dd}_%i.log.gz, append=true, bufferedIO=true, bufferSize=8192, policy=CompositeTriggeringPolicy(policies=[TimeBasedTriggeringPolicy(nextRolloverMillis=0, interval=1, modulate=false), SizeBasedTriggeringPolicy(size=10485760)]), strategy=DefaultRolloverStrategy(min=1, max=15, useMax=true), advertiseURI=null, layout=%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n, filePermissions=null, fileOwner=null]]
+	at org.apache.logging.log4j.core.appender.AbstractManager.getManager(AbstractManager.java:146)
+	at org.apache.logging.log4j.core.appender.OutputStreamManager.getManager(OutputStreamManager.java:100)
+	at org.apache.logging.log4j.core.appender.rolling.RollingFileManager.getFileManager(RollingFileManager.java:217)
+	at org.apache.logging.log4j.core.appender.RollingFileAppender$Builder.build(RollingFileAppender.java:146)
+	at org.apache.logging.log4j.core.appender.RollingFileAppender$Builder.build(RollingFileAppender.java:62)
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.build(PluginBuilder.java:124)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createPluginObject(AbstractConfiguration.java:1122)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1047)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1039)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.doConfigure(AbstractConfiguration.java:651)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.initialize(AbstractConfiguration.java:249)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.start(AbstractConfiguration.java:295)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:621)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:285)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:175)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:166)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithSpecificConfig(AbstractLoggingSystem.java:67)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initialize(AbstractLoggingSystem.java:57)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.initialize(Log4J2LoggingSystem.java:147)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:295)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:263)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:226)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEvent(LoggingApplicationListener.java:199)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:127)
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:54)
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:347)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at top.coderak.RippleApp.main(RippleApp.java:17)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:50)
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:51)
+
+2026-05-17 00:01:52,084 main ERROR Unable to invoke factory method in class org.apache.logging.log4j.core.appender.RollingFileAppender for element RollingFile: java.lang.IllegalStateException: No factory method found for class org.apache.logging.log4j.core.appender.RollingFileAppender java.lang.IllegalStateException: No factory method found for class org.apache.logging.log4j.core.appender.RollingFileAppender
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.findFactoryMethod(PluginBuilder.java:238)
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.build(PluginBuilder.java:136)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createPluginObject(AbstractConfiguration.java:1122)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1047)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1039)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.doConfigure(AbstractConfiguration.java:651)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.initialize(AbstractConfiguration.java:249)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.start(AbstractConfiguration.java:295)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:621)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:285)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:175)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:166)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithSpecificConfig(AbstractLoggingSystem.java:67)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initialize(AbstractLoggingSystem.java:57)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.initialize(Log4J2LoggingSystem.java:147)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:295)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:263)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:226)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEvent(LoggingApplicationListener.java:199)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:127)
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:54)
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:347)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at top.coderak.RippleApp.main(RippleApp.java:17)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:50)
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:51)
+
+2026-05-17 00:01:52,088 main ERROR Unable to create file E:/ripple-logs/error.log java.io.IOException: Could not create directory E:\ripple-logs
+	at org.apache.logging.log4j.core.util.FileUtils.mkdir(FileUtils.java:120)
+	at org.apache.logging.log4j.core.util.FileUtils.makeParentDirs(FileUtils.java:137)
+	at org.apache.logging.log4j.core.appender.rolling.RollingFileManager$RollingFileManagerFactory.createManager(RollingFileManager.java:732)
+	at org.apache.logging.log4j.core.appender.rolling.RollingFileManager$RollingFileManagerFactory.createManager(RollingFileManager.java:716)
+	at org.apache.logging.log4j.core.appender.AbstractManager.getManager(AbstractManager.java:144)
+	at org.apache.logging.log4j.core.appender.OutputStreamManager.getManager(OutputStreamManager.java:100)
+	at org.apache.logging.log4j.core.appender.rolling.RollingFileManager.getFileManager(RollingFileManager.java:217)
+	at org.apache.logging.log4j.core.appender.RollingFileAppender$Builder.build(RollingFileAppender.java:146)
+	at org.apache.logging.log4j.core.appender.RollingFileAppender$Builder.build(RollingFileAppender.java:62)
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.build(PluginBuilder.java:124)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createPluginObject(AbstractConfiguration.java:1122)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1047)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1039)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.doConfigure(AbstractConfiguration.java:651)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.initialize(AbstractConfiguration.java:249)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.start(AbstractConfiguration.java:295)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:621)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:285)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:175)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:166)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithSpecificConfig(AbstractLoggingSystem.java:67)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initialize(AbstractLoggingSystem.java:57)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.initialize(Log4J2LoggingSystem.java:147)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:295)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:263)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:226)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEvent(LoggingApplicationListener.java:199)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:127)
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:54)
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:347)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at top.coderak.RippleApp.main(RippleApp.java:17)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:50)
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:51)
+
+2026-05-17 00:01:52,089 main ERROR Could not create plugin of type class org.apache.logging.log4j.core.appender.RollingFileAppender for element RollingFile: java.lang.IllegalStateException: ManagerFactory [org.apache.logging.log4j.core.appender.rolling.RollingFileManager$RollingFileManagerFactory@32115b28] unable to create manager for [E:/ripple-logs/error.log] with data [org.apache.logging.log4j.core.appender.rolling.RollingFileManager$FactoryData@74287ea3[pattern=E:/ripple-logs/ripple-logs-ERROR-%d{yyyy-MM-dd}_%i.log.gz, append=true, bufferedIO=true, bufferSize=8192, policy=CompositeTriggeringPolicy(policies=[TimeBasedTriggeringPolicy(nextRolloverMillis=0, interval=1, modulate=false), SizeBasedTriggeringPolicy(size=10485760)]), strategy=DefaultRolloverStrategy(min=1, max=15, useMax=true), advertiseURI=null, layout=%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n, filePermissions=null, fileOwner=null]] java.lang.IllegalStateException: ManagerFactory [org.apache.logging.log4j.core.appender.rolling.RollingFileManager$RollingFileManagerFactory@32115b28] unable to create manager for [E:/ripple-logs/error.log] with data [org.apache.logging.log4j.core.appender.rolling.RollingFileManager$FactoryData@74287ea3[pattern=E:/ripple-logs/ripple-logs-ERROR-%d{yyyy-MM-dd}_%i.log.gz, append=true, bufferedIO=true, bufferSize=8192, policy=CompositeTriggeringPolicy(policies=[TimeBasedTriggeringPolicy(nextRolloverMillis=0, interval=1, modulate=false), SizeBasedTriggeringPolicy(size=10485760)]), strategy=DefaultRolloverStrategy(min=1, max=15, useMax=true), advertiseURI=null, layout=%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n, filePermissions=null, fileOwner=null]]
+	at org.apache.logging.log4j.core.appender.AbstractManager.getManager(AbstractManager.java:146)
+	at org.apache.logging.log4j.core.appender.OutputStreamManager.getManager(OutputStreamManager.java:100)
+	at org.apache.logging.log4j.core.appender.rolling.RollingFileManager.getFileManager(RollingFileManager.java:217)
+	at org.apache.logging.log4j.core.appender.RollingFileAppender$Builder.build(RollingFileAppender.java:146)
+	at org.apache.logging.log4j.core.appender.RollingFileAppender$Builder.build(RollingFileAppender.java:62)
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.build(PluginBuilder.java:124)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createPluginObject(AbstractConfiguration.java:1122)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1047)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1039)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.doConfigure(AbstractConfiguration.java:651)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.initialize(AbstractConfiguration.java:249)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.start(AbstractConfiguration.java:295)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:621)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:285)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:175)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:166)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithSpecificConfig(AbstractLoggingSystem.java:67)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initialize(AbstractLoggingSystem.java:57)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.initialize(Log4J2LoggingSystem.java:147)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:295)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:263)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:226)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEvent(LoggingApplicationListener.java:199)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:127)
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:54)
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:347)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at top.coderak.RippleApp.main(RippleApp.java:17)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:50)
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:51)
+
+2026-05-17 00:01:52,091 main ERROR Unable to invoke factory method in class org.apache.logging.log4j.core.appender.RollingFileAppender for element RollingFile: java.lang.IllegalStateException: No factory method found for class org.apache.logging.log4j.core.appender.RollingFileAppender java.lang.IllegalStateException: No factory method found for class org.apache.logging.log4j.core.appender.RollingFileAppender
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.findFactoryMethod(PluginBuilder.java:238)
+	at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.build(PluginBuilder.java:136)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createPluginObject(AbstractConfiguration.java:1122)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1047)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:1039)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.doConfigure(AbstractConfiguration.java:651)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.initialize(AbstractConfiguration.java:249)
+	at org.apache.logging.log4j.core.config.AbstractConfiguration.start(AbstractConfiguration.java:295)
+	at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:621)
+	at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:285)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:175)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.loadConfiguration(Log4J2LoggingSystem.java:166)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithSpecificConfig(AbstractLoggingSystem.java:67)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initialize(AbstractLoggingSystem.java:57)
+	at org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.initialize(Log4J2LoggingSystem.java:147)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:295)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:263)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:226)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEvent(LoggingApplicationListener.java:199)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:127)
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:54)
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:347)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at top.coderak.RippleApp.main(RippleApp.java:17)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87)
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:50)
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:51)
+
+2026-05-17 00:01:52,093 main ERROR Null object returned for File in appenders.
+2026-05-17 00:01:52,094 main ERROR Null object returned for RollingFile in appenders.
+2026-05-17 00:01:52,095 main ERROR Null object returned for RollingFile in appenders.
+2026-05-17 00:01:52,095 main ERROR Null object returned for RollingFile in appenders.
+2026-05-17 00:01:52,097 main ERROR Unable to locate appender "Filelog" for logger config "root"
+2026-05-17 00:01:52,098 main ERROR Unable to locate appender "RollingFileInfo" for logger config "root"
+2026-05-17 00:01:52,099 main ERROR Unable to locate appender "RollingFileWarn" for logger config "root"
+2026-05-17 00:01:52,099 main ERROR Unable to locate appender "RollingFileError" for logger config "root"
+
+                    ////////////////////////////////////////////////////////////////////
+                    //                          _ooOoo_                               //
+                    //                         o8888888o                              //
+                    //                         88" . "88                              //
+                    //                         (| ^_^ |)                              //
+                    //                         O\  =  /O                              //
+                    //                      ____/`---'\____                           //
+                    //                    .'  \\|     |//  `.                         //
+                    //                   /  \\|||  :  |||//  \                        //
+                    //                  /  _||||| -:- |||||-  \                       //
+                    //                  |   | \\\  -  /// |   |                       //
+                    //                  | \_|  ''\---/''  |   |                       //
+                    //                  \  .-\__  `-`  ___/-. /                       //
+                    //                ___`. .'  /--.--\  `. . ___                     //
+                    //              ."" '<  `.___\_<|>_/___.'  >'"".                  //
+                    //            | | :  `- \`.;`\ _ /`;.`/ - ` : | |                 //
+                    //            \  \ `-.   \_ __\ /__ _/   .-` /  /                 //
+                    //      ========`-.____`-.___\_____/___.-`____.-'========         //
+                    //                           `=---='                              //
+                    //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        //
+                    //             倹怕隠嗷       喟音經字      喟涙BUG                //
+                    ////////////////////////////////////////////////////////////////////
+                                                                                                  ,--.
+,-.----.                                  ,--,                                                     ,---,          ,--/  /|
+\    /  \    ,--,   ,-.----.  ,-.----.  ,--.'|                       ,---,                        '  .' \      ,---,': / '
+;   :    \ ,--.'|   \    /  \ \    /  \ |  | :                     ,---.'|                       /  ;    '.    :   : '/ /
+|   | .\ : |  |,    |   :    ||   :    |:  : '                     |   | :                      :  :       \   |   '   ,
+.   : |: | `--'_    |   | .\ :|   | .\ :|  ' |      ,---.          :   : :         .--,         :  |   /\   \  '   |  /
+|   |  \ : ,' ,'|   .   : |: |.   : |: |'  | |     /     \         :     |,-.    /_ ./|         |  :  ' ;.   : |   ;  ;
+|   : .  / '  | |   |   |  \ :|   |  \ :|  | :    /    /  |        |   : '  | , ' , ' :         |  |  ;/  \   \:   '   \
+;   | |  \ |  | :   |   : .  ||   : .  |'  : |__ .    ' / |        |   |  / :/___/ \: |         '  :  | \  \ ,'|   |    '
+|   | ;\  \'  : |__ :     |`-':     |`-'|  | '.'|'   ;   /|        '   : |: | .  \  ' |         |  |  '  '--'  '   : |.  \
+:   ' | \.'|  | '.'|:   : :   :   : :   ;  :    ;'   |  / |        |   | '/ :  \  ;   :         |  :  :        |   | '_\.'
+:   : :-'  ;  :    ;|   | :   |   | :   |  ,   / |   :    |        |   :    |   \  \  ;         |  | ,'        '   : |
+|   |.'    |  ,   / `---'.|   `---'.|    ---`-'   \   \  /         /    \  /     :  \  \        `--''          ;   |,'
+`---'       ---`-'    `---`     `---`              `----'          `-'----'       \  ' ;                       '---'
+                                                                                   `--`
+
+
+------------------------------------------------------------------------------------------------------------------------------
+**********************************************spring-boot 2.1.0.RELEASE*******************************************************
+！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+00:01:53.853 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+00:01:53.862 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+00:01:53.909 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 37ms. Found 0 repository interfaces.
+00:01:56.125 [main] INFO  com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure - Init DruidDataSource
+00:01:56.497 [main] ERROR com.alibaba.druid.pool.DruidDataSource - testWhileIdle is true, validationQuery not set
+00:01:56.521 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+00:01:58.470 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8883"]
+00:01:58.486 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+00:01:58.487 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet Engine: Apache Tomcat/9.0.12
+00:01:58.510 [main] INFO  org.apache.catalina.core.AprLifecycleListener - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk-19\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;c:\\Users\\Admin\\.trae-cn\\tools\\trae-gopls\\current;c:\\Users\\Admin\\.trae-cn\\sdks\\workspaces\\e8e88a3a\\versions\\node\\current;c:\\Users\\Admin\\.trae-cn\\sdks\\versions\\node\\current;c:\Users\Admin\.trae-cn\tools\trae-gopls\current;c:\Users\Admin\.trae-cn\sdks\workspaces\e8e88a3a\versions\node\current;c:\Users\Admin\.trae-cn\sdks\versions\node\current;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\libnvvp;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;D:\app\;C:\Program Files\NVIDIA Corporation\Nsight Compute 2021.3.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;D:\tool\mingw64\bin;C:\Program Files\dotnet\;D:\tool\cursor\resources\app\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\NetSarang\Xmanager 8\;D:\tool\;D:\tool\Git\cmd;C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;D:\tool\Microsoft VS Code\bin;D:\tool\IntelliJ IDEA 2023.1.2\bin;D:\DevTools\apache-maven-3.9.9\bin;C:\Users\Admin\AppData\Roaming\npm;.]
+00:01:58.721 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/ripple] - Initializing Spring embedded WebApplicationContext
+00:01:59.078 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+00:01:59.080 [main] INFO  com.netflix.config.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+00:01:59.120 [main] INFO  com.netflix.config.DynamicPropertyFactory - DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@2f00f851
+00:02:00.453 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+00:02:00.637 [main] INFO  org.hibernate.Version - HHH000412: Hibernate Core {5.3.7.Final}
+00:02:00.640 [main] INFO  org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+00:02:00.896 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+00:02:01.412 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+00:02:01.841 [main] INFO  org.hibernate.tool.schema.internal.SchemaCreatorImpl - HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@2e463f4'
+00:02:02.241 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+00:02:02.242 [main] INFO  com.netflix.config.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+00:02:10.093 [main] INFO  org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+00:02:10.101 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+00:02:10.104 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+00:02:10.107 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+00:02:10.137 [main] ERROR org.apache.catalina.core.ContainerBase - A child container failed during stop
+java.util.concurrent.ExecutionException: org.apache.catalina.LifecycleException: Failed to stop component [WebappLoader[StandardEngine[Tomcat].StandardHost[localhost].TomcatEmbeddedContext[/ripple]]]
+	at java.util.concurrent.FutureTask.report(FutureTask.java:122) ~[?:?]
+	at java.util.concurrent.FutureTask.get(FutureTask.java:191) ~[?:?]
+	at org.apache.catalina.core.ContainerBase.stopInternal(ContainerBase.java:1007) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.util.LifecycleBase.stop(LifecycleBase.java:257) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.core.ContainerBase$StopChild.call(ContainerBase.java:1445) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.core.ContainerBase$StopChild.call(ContainerBase.java:1434) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145) ~[?:?]
+	at org.apache.catalina.core.ContainerBase.stopInternal(ContainerBase.java:1001) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.util.LifecycleBase.stop(LifecycleBase.java:257) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.core.StandardService.stopInternal(StandardService.java:474) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.util.LifecycleBase.stop(LifecycleBase.java:257) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.core.StandardServer.stopInternal(StandardServer.java:791) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.util.LifecycleBase.stop(LifecycleBase.java:257) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.startup.Tomcat.stop(Tomcat.java:380) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.stopTomcat(TomcatWebServer.java:250) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.stop(TomcatWebServer.java:306) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.stopAndReleaseWebServer(ServletWebServerApplicationContext.java:309) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at top.coderak.RippleApp.main(RippleApp.java:17) ~[classes!/:1.2.2]
+	at jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:578) ~[?:?]
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48) ~[Ripple-1.2.2.jar:1.2.2]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87) ~[Ripple-1.2.2.jar:1.2.2]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:50) ~[Ripple-1.2.2.jar:1.2.2]
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:51) ~[Ripple-1.2.2.jar:1.2.2]
+Caused by: org.apache.catalina.LifecycleException: Failed to stop component [WebappLoader[StandardEngine[Tomcat].StandardHost[localhost].TomcatEmbeddedContext[/ripple]]]
+	at org.apache.catalina.util.LifecycleBase.handleSubClassException(LifecycleBase.java:441) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.util.LifecycleBase.stop(LifecycleBase.java:267) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.core.StandardContext.stopInternal(StandardContext.java:5367) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.util.LifecycleBase.stop(LifecycleBase.java:257) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.core.ContainerBase$StopChild.call(ContainerBase.java:1445) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.core.ContainerBase$StopChild.call(ContainerBase.java:1434) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145) ~[?:?]
+	at org.apache.catalina.core.ContainerBase.stopInternal(ContainerBase.java:1001) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	... 29 more
+Caused by: java.lang.reflect.InaccessibleObjectException: Unable to make field static final java.io.ClassCache java.io.ObjectStreamClass$Caches.localDescs accessible: module java.base does not "opens java.io" to unnamed module @71c7db30
+	at java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:387) ~[?:?]
+	at java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:363) ~[?:?]
+	at java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:311) ~[?:?]
+	at java.lang.reflect.Field.checkCanSetAccessible(Field.java:180) ~[?:?]
+	at java.lang.reflect.Field.setAccessible(Field.java:174) ~[?:?]
+	at org.apache.catalina.loader.WebappClassLoaderBase.clearCache(WebappClassLoaderBase.java:2206) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesObjectStreamClassCaches(WebappClassLoaderBase.java:2194) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.loader.WebappClassLoaderBase.clearReferences(WebappClassLoaderBase.java:1567) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.loader.WebappClassLoaderBase.stop(WebappClassLoaderBase.java:1497) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.loader.WebappLoader.stopInternal(WebappLoader.java:442) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.util.LifecycleBase.stop(LifecycleBase.java:257) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.core.StandardContext.stopInternal(StandardContext.java:5367) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.util.LifecycleBase.stop(LifecycleBase.java:257) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.core.ContainerBase$StopChild.call(ContainerBase.java:1445) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.core.ContainerBase$StopChild.call(ContainerBase.java:1434) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145) ~[?:?]
+	at org.apache.catalina.core.ContainerBase.stopInternal(ContainerBase.java:1001) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	... 29 more
+00:02:10.148 [main] ERROR org.apache.catalina.core.ContainerBase - A child container failed during stop
+java.util.concurrent.ExecutionException: org.apache.catalina.LifecycleException: A child container failed during stop
+	at java.util.concurrent.FutureTask.report(FutureTask.java:122) ~[?:?]
+	at java.util.concurrent.FutureTask.get(FutureTask.java:191) ~[?:?]
+	at org.apache.catalina.core.ContainerBase.stopInternal(ContainerBase.java:1007) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.util.LifecycleBase.stop(LifecycleBase.java:257) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.core.StandardService.stopInternal(StandardService.java:474) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.util.LifecycleBase.stop(LifecycleBase.java:257) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.core.StandardServer.stopInternal(StandardServer.java:791) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.util.LifecycleBase.stop(LifecycleBase.java:257) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.startup.Tomcat.stop(Tomcat.java:380) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.stopTomcat(TomcatWebServer.java:250) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.stop(TomcatWebServer.java:306) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.stopAndReleaseWebServer(ServletWebServerApplicationContext.java:309) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at top.coderak.RippleApp.main(RippleApp.java:17) ~[classes!/:1.2.2]
+	at jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:578) ~[?:?]
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48) ~[Ripple-1.2.2.jar:1.2.2]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87) ~[Ripple-1.2.2.jar:1.2.2]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:50) ~[Ripple-1.2.2.jar:1.2.2]
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:51) ~[Ripple-1.2.2.jar:1.2.2]
+Caused by: org.apache.catalina.LifecycleException: A child container failed during stop
+	at org.apache.catalina.core.ContainerBase.stopInternal(ContainerBase.java:1015) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.util.LifecycleBase.stop(LifecycleBase.java:257) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.core.ContainerBase$StopChild.call(ContainerBase.java:1445) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at org.apache.catalina.core.ContainerBase$StopChild.call(ContainerBase.java:1434) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[?:?]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145) ~[?:?]
+	at org.apache.catalina.core.ContainerBase.stopInternal(ContainerBase.java:1001) ~[tomcat-embed-core-9.0.12.jar!/:9.0.12]
+	... 22 more
+00:02:10.168 [main] ERROR org.springframework.boot.SpringApplication - Application run failed
+org.springframework.context.ApplicationContextException: Failed to start bean 'org.springframework.kafka.config.internalKafkaListenerEndpointRegistry'; nested exception is java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:185) ~[spring-context-5.1.2.RELEASE.jar!/:5.1.2.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.access$200(DefaultLifecycleProcessor.java:53) ~[spring-context-5.1.2.RELEASE.jar!/:5.1.2.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:360) ~[spring-context-5.1.2.RELEASE.jar!/:5.1.2.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:158) ~[spring-context-5.1.2.RELEASE.jar!/:5.1.2.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:122) ~[spring-context-5.1.2.RELEASE.jar!/:5.1.2.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:879) ~[spring-context-5.1.2.RELEASE.jar!/:5.1.2.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:161) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549) ~[spring-context-5.1.2.RELEASE.jar!/:5.1.2.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248) ~[spring-boot-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at top.coderak.RippleApp.main(RippleApp.java:17) ~[classes!/:1.2.2]
+	at jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:578) ~[?:?]
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48) ~[Ripple-1.2.2.jar:1.2.2]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87) ~[Ripple-1.2.2.jar:1.2.2]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:50) ~[Ripple-1.2.2.jar:1.2.2]
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:51) ~[Ripple-1.2.2.jar:1.2.2]
+Caused by: java.lang.IllegalStateException: No group.id found in consumer config, container properties, or @KafkaListener annotation; a group.id is required when group management is used.
+	at org.springframework.util.Assert.state(Assert.java:73) ~[spring-core-5.1.2.RELEASE.jar!/:5.1.2.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.checkGroupId(AbstractMessageListenerContainer.java:335) ~[spring-kafka-2.2.7.RELEASE.jar!/:2.2.7.RELEASE]
+	at org.springframework.kafka.listener.AbstractMessageListenerContainer.start(AbstractMessageListenerContainer.java:287) ~[spring-kafka-2.2.7.RELEASE.jar!/:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.startIfNecessary(KafkaListenerEndpointRegistry.java:306) ~[spring-kafka-2.2.7.RELEASE.jar!/:2.2.7.RELEASE]
+	at org.springframework.kafka.config.KafkaListenerEndpointRegistry.start(KafkaListenerEndpointRegistry.java:255) ~[spring-kafka-2.2.7.RELEASE.jar!/:2.2.7.RELEASE]
+	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:182) ~[spring-context-5.1.2.RELEASE.jar!/:5.1.2.RELEASE]
+	... 20 more

@@ -1,4 +1,4 @@
-package top.coderak.web;
+package top.coderak.modules.auth.controller;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
