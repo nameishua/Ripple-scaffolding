@@ -8,7 +8,7 @@ param(
     [string]$Profile = "local"
 )
 
-$ProjectRoot = "d:\Codex\Ripple-scaffolding"
+$ProjectRoot = $PSScriptRoot
 $LogFile = "$ProjectRoot\backend.log"
 
 function Write-ColorOutput($Text, $Color = "Gray") {

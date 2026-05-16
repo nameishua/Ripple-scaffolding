@@ -14,7 +14,7 @@ Write-Host "Starting with profile: $Profile" -ForegroundColor Yellow
 Write-Host "Server URL: http://localhost:8883/ripple" -ForegroundColor Yellow
 Write-Host ""
 
-$ProjectRoot = "d:\Codex\Ripple-scaffolding"
+$ProjectRoot = $PSScriptRoot
 
 Write-Host "Starting Spring Boot application in background (nohup)..." -ForegroundColor Green
 Write-Host ""

@@ -13,20 +13,23 @@ Write-Host "Starting development server in background..." -ForegroundColor Yello
 Write-Host "Frontend URL: http://localhost:$Port" -ForegroundColor Yellow
 Write-Host ""
 
-$FrontendDir = "d:\Codex\Ripple-scaffolding\vue-admin"
+$FrontendDir = $PSScriptRoot
+$ProjectRoot = Split-Path $PSScriptRoot -Parent
 
 Write-Host "Starting Vite dev server in background (nohup)..." -ForegroundColor Green
 Write-Host ""
 
-Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$FrontendDir'; npm run dev 2>&1 | Tee-Object -FilePath '..\frontend.log'" -WindowStyle Hidden
+$FrontendLog = Join-Path $ProjectRoot "frontend.log"
+
+Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$FrontendDir'; npm run dev 2>&1 | Tee-Object -FilePath '$FrontendLog'" -WindowStyle Hidden
 
 Start-Sleep -Seconds 5
 
-if (Test-Path "frontend.log") {
+if (Test-Path $FrontendLog) {
     Write-Host ""
     Write-Host "Frontend is starting in background..." -ForegroundColor Green
-    Write-Host "Log file: $FrontendDir\..\frontend.log" -ForegroundColor Cyan
-    Write-Host "Check logs: Get-Content ..\frontend.log -Wait -Tail 30" -ForegroundColor Cyan
+    Write-Host "Log file: $FrontendLog" -ForegroundColor Cyan
+    Write-Host "Check logs: Get-Content '$FrontendLog' -Wait -Tail 30" -ForegroundColor Cyan
     Write-Host ""
     Write-Host "Frontend will be available at: http://localhost:$Port" -ForegroundColor Green
 } else {

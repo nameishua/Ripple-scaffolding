@@ -7,8 +7,8 @@ param(
     [int]$Port = 3000
 )
 
-$FrontendRoot = "d:\Codex\Ripple-scaffolding\vue-admin"
-$ProjectRoot = "d:\Codex\Ripple-scaffolding"
+$FrontendRoot = $PSScriptRoot
+$ProjectRoot = Split-Path $PSScriptRoot -Parent
 $LogFile = "$ProjectRoot\frontend.log"
 
 function Write-ColorOutput($Text, $Color = "Gray") {

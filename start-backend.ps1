@@ -14,7 +14,7 @@ Write-Host "Profile: $Profile" -ForegroundColor Yellow
 Write-Host "Log file: backend.log" -ForegroundColor Yellow
 Write-Host ""
 
-$ProjectRoot = "d:\Codex\Ripple-scaffolding"
+$ProjectRoot = $PSScriptRoot
 
 cd $ProjectRoot
 
