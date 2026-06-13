@@ -1,5 +1,6 @@
 package top.coderak.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import top.coderak.core.base.bean.PageInfo;
 import top.coderak.core.base.constants.UserConstants;
@@ -22,6 +23,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("ALL")
+@Slf4j
 @Service
 public class UserServiceImpl<T> extends BaseCRUDManagerImpl<User> implements UserService {
 
@@ -92,8 +94,7 @@ public class UserServiceImpl<T> extends BaseCRUDManagerImpl<User> implements Use
             userMapper.deleteUser(id);
             flag = true;
         } catch (Exception e) {
-            System.out.println("删除失败!");
-            e.printStackTrace();
+            log.error("删除失败!", e);
         }
         return flag;
     }

@@ -14,6 +14,7 @@ import top.coderak.mapper.UserMapper;
 import java.util.HashSet;
 import java.util.Set;
 
+@Slf4j
 public class CustomRealm extends AuthorizingRealm {
 
     @Autowired
@@ -64,7 +65,7 @@ public class CustomRealm extends AuthorizingRealm {
     }
 
     private AuthenticationInfo doPasswordAuthentication(UsernamePasswordToken token) {
-        System.out.println("-------身份认证方法--------");
+        log.debug("-------身份认证方法--------");
 
         String account = (String) token.getPrincipal();
 
@@ -79,7 +80,7 @@ public class CustomRealm extends AuthorizingRealm {
 
             user = userMapper.selectByAccount(account);
 
-            System.out.println(user);
+            log.debug("User: {}", user);
 
             if (user == null) {
                 throw new AccountException("用户不存在");
@@ -89,9 +90,8 @@ public class CustomRealm extends AuthorizingRealm {
 
             String password = user.getPassword();
 
-            System.out.println(tempString);
-
-            System.out.println(password);
+            log.debug("Input password hash: {}", tempString);
+            log.debug("Stored password: {}", password);
 
             if (!tempString.equals(password)) {
                 throw new AccountException("密码不正确");

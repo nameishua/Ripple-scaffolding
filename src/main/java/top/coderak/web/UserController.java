@@ -3,6 +3,7 @@ package top.coderak.web;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +21,7 @@ import top.coderak.service.UserService;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+@Slf4j
 @Api(tags = "用户管理接口")
 @RestController
 @RequestMapping(value = "/user")
@@ -88,7 +90,7 @@ public class UserController extends BaseController {
             user.setAge(Integer.valueOf(getParam("age")));
         }
         user.setId(getParam("id"));
-        System.out.println(user);
+        log.debug("Query user: {}", user);
         writeSuccessResult((List<User>) baseMysqlCRUDManager.query(user));
     }
 
@@ -112,7 +114,7 @@ public class UserController extends BaseController {
         User user = new User();
         user.setName(name);
         user.setAge(Integer.valueOf(age));
-        System.out.println(userService.query(user));
+        log.debug("Query result: {}", userService.query(user));
         writeSuccessResult(userService.findPage(name, pageIndex, pageSize));
     }
 }
