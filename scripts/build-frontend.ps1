@@ -6,7 +6,8 @@ Write-Host "Ripple Frontend Build Script" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 
-$FrontendDir = "d:\Codex\Ripple-scaffolding\vue-admin"
+$ProjectRoot = Split-Path $PSScriptRoot -Parent
+$FrontendDir = Join-Path $ProjectRoot "vue-admin"
 
 Write-Host "Step 1: Installing dependencies..." -ForegroundColor Yellow
 cd $FrontendDir

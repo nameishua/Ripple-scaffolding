@@ -19,10 +19,11 @@ param(
     [int]$Port = 3000
 )
 
-$ProjectRoot = $PSScriptRoot
+$ProjectRoot = Split-Path $PSScriptRoot -Parent
+$ScriptsDir = $PSScriptRoot
 
-$backendScript = Join-Path $ProjectRoot "manage-backend.ps1"
-$frontendScript = Join-Path $ProjectRoot "vue-admin\manage-frontend.ps1"
+$backendScript = Join-Path $ScriptsDir "manage-backend.ps1"
+$frontendScript = Join-Path $ScriptsDir "manage-frontend.ps1"
 
 function Invoke-Backend($cmd) {
     if (-not (Test-Path $backendScript)) {

@@ -10,7 +10,7 @@ Write-Host "Ripple Backend Build Script" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 
-$ProjectRoot = "d:\Codex\Ripple-scaffolding"
+$ProjectRoot = Split-Path $PSScriptRoot -Parent
 
 Write-Host "Step 1: Clean and compile project..." -ForegroundColor Yellow
 cd $ProjectRoot

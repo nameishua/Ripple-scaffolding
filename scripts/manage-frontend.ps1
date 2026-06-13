@@ -7,8 +7,8 @@ param(
     [int]$Port = 3000
 )
 
-$FrontendRoot = $PSScriptRoot
 $ProjectRoot = Split-Path $PSScriptRoot -Parent
+$FrontendRoot = Join-Path $ProjectRoot "vue-admin"
 $LogFile = "$ProjectRoot\frontend.log"
 
 function Write-ColorOutput($Text, $Color = "Gray") {

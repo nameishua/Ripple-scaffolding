@@ -8,7 +8,7 @@ param(
     [string]$Profile = "local"
 )
 
-$ProjectRoot = $PSScriptRoot
+$ProjectRoot = Split-Path $PSScriptRoot -Parent
 $LogFile = "$ProjectRoot\backend.log"
 
 function Write-ColorOutput($Text, $Color = "Gray") {

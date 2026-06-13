@@ -61,29 +61,63 @@ $env:RIPPLE_DATASOURCE_USERNAME="root"
 $env:RIPPLE_DATASOURCE_PASSWORD="你的密码"
 ```
 
-### 4. 启动后端
+### 4. 启动服务
+
+所有脚本已整合到 `scripts/` 目录：
 
 ```powershell
-.\start-dev.ps1
-# 或: mvn spring-boot:run -Dspring.profiles.active=local
+cd scripts
+
+# 一键启动前后端（推荐）
+.\manage-dev.ps1 start
+
+# 或单独启动后端
+.\manage-backend.ps1 start -Profile local
+
+# 或单独启动前端
+.\manage-frontend.ps1 start
 ```
 
-接口根路径：`http://localhost:8883/ripple`
+**服务地址**：
+- 后端：`http://localhost:8883/ripple`
+- 前端：`http://localhost:3000`
 
-### 5. 启动前端
+### 5. 管理命令
 
 ```powershell
-cd vue-admin
-npm install
-npm run dev
+cd scripts
+
+# 查看状态
+.\manage-dev.ps1 status
+
+# 停止服务
+.\manage-dev.ps1 stop
+
+# 重启服务
+.\manage-dev.ps1 restart
+
+# 查看日志
+.\manage-dev.ps1 logs
+.\manage-dev.ps1 logs -Target frontend
 ```
 
-管理端地址：`http://localhost:3000`
-
-也可在仓库根目录一键启动前后端：
+### 6. 构建项目
 
 ```powershell
-.\start-dev.ps1
+cd scripts
+
+# 构建后端
+.\build-backend.ps1
+
+# 构建前端
+.\build-frontend.ps1
+```
+
+### 7. 测试接口
+
+```powershell
+cd scripts
+.\test-apis.ps1
 ```
 
 ## 模块对照
