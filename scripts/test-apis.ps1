@@ -1,10 +1,17 @@
-# Ripple 后端全量接口测试
+<# UTF-8 with BOM #>
+# Ripple API Test Script
 param(
     [string]$BaseUrl = "http://localhost:8883/ripple",
     [int]$StartupTimeoutSec = 120
 )
 
+# Fix PowerShell encoding issues
+chcp 65001 | Out-Null
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+[Console]::InputEncoding = [System.Text.Encoding]::UTF8
+$OutputEncoding = [System.Text.Encoding]::UTF8
 $ErrorActionPreference = "Continue"
+
 $Passed = 0
 $Failed = 0
 $Skipped = 0
@@ -25,7 +32,7 @@ function Test-Api {
         [switch]$SkipOnNoToken
     )
     if ($SkipOnNoToken -and -not $Token) {
-        Write-Host "[SKIP] $Name (无 Token)" -ForegroundColor DarkYellow
+        Write-Host "[SKIP] $Name (No Token)" -ForegroundColor DarkYellow
         $script:Skipped++
         return
     }
@@ -43,19 +50,19 @@ function Test-Api {
 }
 
 function Wait-BackendReady {
-    Write-Host "等待后端就绪 ($BaseUrl) ..." -ForegroundColor Cyan
+    Write-Host "Waiting for backend ($BaseUrl) ..." -ForegroundColor Cyan
     $deadline = (Get-Date).AddSeconds($StartupTimeoutSec)
     while ((Get-Date) -lt $deadline) {
         try {
             $h = Invoke-RestMethod -Uri "$BaseUrl/actuator/health" -Method Get -TimeoutSec 3
             if ($h.status -eq "UP") {
-                Write-Host "后端已就绪 (health=UP)" -ForegroundColor Green
+                Write-Host "Backend ready (health=UP)" -ForegroundColor Green
                 return $true
             }
         } catch { }
         Start-Sleep -Seconds 3
     }
-    throw "后端在 ${StartupTimeoutSec}s 内未启动"
+    throw "Backend not ready within ${StartupTimeoutSec}s"
 }
 
 function Get-AuthHeaders {
@@ -63,23 +70,23 @@ function Get-AuthHeaders {
 }
 
 function Assert-ApiSuccess($res, [string]$hint = "") {
-    if ($null -eq $res) { throw "空响应 $hint" }
+    if ($null -eq $res) { throw "Null response $hint" }
     if ($res.PSObject.Properties.Name -contains "success") {
         if (-not $res.success) {
-            $errMsg = if ($res.message) { $res.message } else { "API 返回失败 $hint" }
+            $errMsg = if ($res.message) { $res.message } else { "API returned failure $hint" }
             throw $errMsg
         }
     }
 }
 
 Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "Ripple 后端全量接口测试" -ForegroundColor Cyan
+Write-Host "Ripple Backend API Test Suite" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 
 Wait-BackendReady
 
-# --- 公开接口 ---
-Write-Title "公开接口"
+# --- Public APIs ---
+Write-Title "Public APIs"
 
 Test-Api "GET /actuator/health" {
     $r = Invoke-RestMethod -Uri "$BaseUrl/actuator/health" -Method Get
@@ -95,30 +102,30 @@ Test-Api "GET /framework/info" {
     Assert-ApiSuccess $r
 }
 
-Test-Api "GET /login/check (未登录提示)" {
+Test-Api "GET /login/check (not logged in)" {
     $r = Invoke-RestMethod -Uri "$BaseUrl/login/check" -Method Get
-    if ($r.success) { throw "应返回未登录提示" }
+    if ($r.success) { throw "Should return not logged in" }
 }
 
-Test-Api "POST /login/check (登录)" {
+Test-Api "POST /login/check (login)" {
     $body = @{ account = "admin"; password = "123" }
     $r = Invoke-RestMethod -Uri "$BaseUrl/login/check" -Method Post -Body $body -ContentType "application/x-www-form-urlencoded"
     Assert-ApiSuccess $r
     $script:Token = $r.data.token
-    if (-not $Token) { throw "未获取到 token" }
+    if (-not $Token) { throw "Token not received" }
 }
 
-Test-Api "未登录访问受保护接口应被拦截" {
+Test-Api "Protected endpoint without token should be blocked" {
     try {
         Invoke-RestMethod -Uri "$BaseUrl/user/findAllAnnotation" -Method Post -ErrorAction Stop | Out-Null
-        throw "应被 JWT 拦截"
+        throw "Should be blocked by JWT"
     } catch {
-        if ($_.Exception.Message -match "应被") { throw }
+        if ($_.Exception.Message -match "Should be") { throw }
     }
 }
 
-# --- 旧版 /user 接口 ---
-Write-Title "用户接口 /user"
+# --- Legacy /user APIs ---
+Write-Title "User APIs /user"
 
 $H = { Get-AuthHeaders }
 
@@ -155,8 +162,8 @@ Test-Api "POST /user/findPage" -SkipOnNoToken {
     if ($r.code -ne "1") { throw "code=$($r.code)" }
 }
 
-# --- 序列 ---
-Write-Title "序列接口 /sequence"
+# --- Sequence ---
+Write-Title "Sequence API /sequence"
 
 Test-Api "POST /sequence/list" -SkipOnNoToken {
     $body = @{ type = "USER" }
@@ -164,8 +171,8 @@ Test-Api "POST /sequence/list" -SkipOnNoToken {
     if ($r.code -ne "1") { throw "code=$($r.code)" }
 }
 
-# --- 管理端 /admin/user ---
-Write-Title "管理端 /admin/user"
+# --- Admin /admin/user ---
+Write-Title "Admin APIs /admin/user"
 
 Test-Api "GET /admin/user/info" -SkipOnNoToken {
     $r = Invoke-RestMethod -Uri "$BaseUrl/admin/user/info" -Method Get -Headers (& $H)
@@ -187,8 +194,8 @@ Test-Api "GET /admin/user/{id}" -SkipOnNoToken {
     Assert-ApiSuccess $r
 }
 
-# --- 管理端 /admin/role ---
-Write-Title "管理端 /admin/role"
+# --- Admin /admin/role ---
+Write-Title "Admin APIs /admin/role"
 
 Test-Api "GET /admin/role/list" -SkipOnNoToken {
     $r = Invoke-RestMethod -Uri "$BaseUrl/admin/role/list" -Method Get -Headers (& $H)
@@ -210,8 +217,8 @@ Test-Api "GET /admin/role/{id}" -SkipOnNoToken {
     Assert-ApiSuccess $r
 }
 
-# --- 管理端 /admin/menu ---
-Write-Title "管理端 /admin/menu"
+# --- Admin /admin/menu ---
+Write-Title "Admin APIs /admin/menu"
 
 Test-Api "GET /admin/menu/tree" -SkipOnNoToken {
     $r = Invoke-RestMethod -Uri "$BaseUrl/admin/menu/tree" -Method Get -Headers (& $H)
@@ -228,8 +235,8 @@ Test-Api "GET /admin/menu/{id}" -SkipOnNoToken {
     Assert-ApiSuccess $r
 }
 
-# --- 写操作（临时数据，尽量可逆）---
-Write-Title "写操作接口（增删改）"
+# --- Write operations ---
+Write-Title "Write Operations (CRUD)"
 
 $testRoleId = $null
 $testMenuId = $null
@@ -290,7 +297,7 @@ Test-Api "POST /admin/role/assignMenus + assignPermissions" -SkipOnNoToken {
 
 Write-Host ""
 Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "测试汇总: 通过 $Passed | 失败 $Failed | 跳过 $Skipped" -ForegroundColor $(if ($Failed -eq 0) { "Green" } else { "Yellow" })
+Write-Host "Test Summary: Passed $Passed | Failed $Failed | Skipped $Skipped" -ForegroundColor $(if ($Failed -eq 0) { "Green" } else { "Yellow" })
 Write-Host "========================================" -ForegroundColor Cyan
 
 if ($Failed -gt 0) { exit 1 }

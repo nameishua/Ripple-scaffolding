@@ -31,33 +31,36 @@ public class ShiroConfig {
 
         Map<String, Filter> filters = new HashMap<>();
         filters.put("jwt", new JWTFilter());
+        filters.put("cors", new CorsFilter());
         shiroFilterFactoryBean.setFilters(filters);
 
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
 
-        filterChainDefinitionMap.put("/login/**", "anon");
-        filterChainDefinitionMap.put("/framework/**", "anon");
-        filterChainDefinitionMap.put("/actuator/**", "anon");
+        // Public endpoints
+        filterChainDefinitionMap.put("/login/**", "anon,cors");
+        filterChainDefinitionMap.put("/framework/**", "anon,cors");
+        filterChainDefinitionMap.put("/actuator/**", "anon,cors");
 
-        filterChainDefinitionMap.put("/swagger-ui.html", "anon");
-        filterChainDefinitionMap.put("/swagger-resources/**", "anon");
-        filterChainDefinitionMap.put("/v2/api-docs", "anon");
-        filterChainDefinitionMap.put("/webjars/**", "anon");
+        filterChainDefinitionMap.put("/swagger-ui.html", "anon,cors");
+        filterChainDefinitionMap.put("/swagger-resources/**", "anon,cors");
+        filterChainDefinitionMap.put("/v2/api-docs", "anon,cors");
+        filterChainDefinitionMap.put("/webjars/**", "anon,cors");
 
-        filterChainDefinitionMap.put("/index.html", "anon");
-        filterChainDefinitionMap.put("/js/**", "anon");
-        filterChainDefinitionMap.put("/css/**", "anon");
-        filterChainDefinitionMap.put("/images/**", "anon");
+        filterChainDefinitionMap.put("/index.html", "anon,cors");
+        filterChainDefinitionMap.put("/js/**", "anon,cors");
+        filterChainDefinitionMap.put("/css/**", "anon,cors");
+        filterChainDefinitionMap.put("/images/**", "anon,cors");
 
-        filterChainDefinitionMap.put("/h2-console/**", "anon");
+        filterChainDefinitionMap.put("/h2-console/**", "anon,cors");
+        filterChainDefinitionMap.put("/druid/**", "anon,cors");
 
-        filterChainDefinitionMap.put("/admin/**", "jwt");
-        filterChainDefinitionMap.put("/user/**", "jwt");
-        filterChainDefinitionMap.put("/sequence/**", "jwt");
+        // Protected endpoints with CORS support
+        filterChainDefinitionMap.put("/admin/**", "cors,jwt");
+        filterChainDefinitionMap.put("/user/**", "cors,jwt");
+        filterChainDefinitionMap.put("/sequence/**", "cors,jwt");
 
-        filterChainDefinitionMap.put("/druid/**", "anon");
-
-        filterChainDefinitionMap.put("/**", "jwt");
+        // Default: CORS + JWT
+        filterChainDefinitionMap.put("/**", "cors,jwt");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
@@ -66,11 +69,11 @@ public class ShiroConfig {
     }
 
     @Bean
-    public SecurityManager securityManager() {
+    public SecurityManager securityManager(CustomRealm customRealm) {
 
         DefaultWebSecurityManager defaultSecurityManager = new DefaultWebSecurityManager();
 
-        defaultSecurityManager.setRealm(customRealm());
+        defaultSecurityManager.setRealm(customRealm);
 
         DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
         DefaultSessionStorageEvaluator sessionStorageEvaluator = new DefaultSessionStorageEvaluator();
